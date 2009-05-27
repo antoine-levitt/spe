@@ -5,7 +5,7 @@ function N = neighbours(A, x, t)
     N = A;
     [row, col] = find(A);
     for i = 1:numel(row)
-        if norm(x(:, row(i)) - x(:, col(i))) > upper_bound
+        if norm(x(row(i), :) - x(col(i), :)) > upper_bound
             N(row(i), col(i)) = 0;
         end
     end

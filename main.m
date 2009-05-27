@@ -18,7 +18,7 @@ A = A + A';
 n_agents = size(A, 1);
 
 Xs = cell(iterations, 1);
-Xs{1} = rand(PARAMS.d, n_agents);
+Xs{1} = rand(n_agents, PARAMS.d);
 
 for t = 2:iterations
     % calculer N
@@ -30,7 +30,7 @@ end
 % plotter les résultats
 res = [];
 for t = 1:iterations
-    somme = sum(Xs{t}, 1);
+    somme = sum(Xs{t}, 2);
     res(t, :) = somme;
 end
 
