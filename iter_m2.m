@@ -3,5 +3,4 @@ function Y=iter_m2(N, X)
     L = diag(sum(N)) - N;
     som = sum(N);
     som = som + (som == 0);
-    Dm1 = diag(som.^-1);
-    Y = X - PARAMS.alpha * Dm1 * L * X;
+    Y = X - PARAMS.alpha * (L * X) ./ som';
