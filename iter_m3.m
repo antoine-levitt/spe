@@ -1,2 +1,3 @@
 function Y=iter_m3(N, X)
-    Y = (X + N * X) ./ (sum(N) + 1)';
+	global PARAMS
+	Y = (X + N * X) ./ repmat((sum(N) + 1)', 1, PARAMS.d);

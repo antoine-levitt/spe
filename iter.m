@@ -1,4 +1,4 @@
-% renvoie l'itération suivante
+% renvoie l'itÃ©ration suivante
 function xtp1 = iter(N, X)
     global PARAMS;
     switch PARAMS.method

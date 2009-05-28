@@ -1,4 +1,4 @@
-function [x, y, h] = graph_draw(adj, varargin)
+function [x, y, h] = graph_draw(adj, color, varargin)
 %  [x, y, h] = graph_draw(adj, varargin)  
 %
 % INPUTS:      ADJ   -  Adjacency matrix (source, sink)
@@ -26,10 +26,12 @@ linewidth = .5;        %   2
 linecolor = 'Black';   %   Red
 fontsize = 8;
 N = size(adj,1);
-color = ones(N, 3);         % colors of elipses around text 
+if ~exist('color')
+	color = ones(N, 3);         % colors of elipses around text 
+end
 labels = cellstr(int2str((1:N)'));    %  labels = cellstr(char(zeros(N,1)+double('+')));
 node_t = zeros(N,1);                  %  
-for i = 1:2:nargin-1                  % get optional args
+for i = 1:2:nargin-2                  % get optional args
     switch varargin{i}
         case 'linestyle', linestyle = varargin{i+1};
         case 'linewidth', linewidth = varargin{i+1};
@@ -136,6 +138,9 @@ p = zeros(size(x));
 t = 0:pi/30:2*pi;
 for i = 1:N
 	px = rx(i) * cos(t) + x(i);    py = ry(i) * sin(t) + y(i);
+	size(px)
+	size(py)
+	size(c(i,:))
 	p(i) = patch(px, py, c(i,:));
 end;
 
