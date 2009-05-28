@@ -4,12 +4,12 @@ addpath 'plot';
 % paramètres
 global PARAMS
 PARAMS.r = 1;
-PARAMS.rho = 1;
-PARAMS.alpha = 0.05;
-PARAMS.method = 2;
+PARAMS.rho = 0.9;
+PARAMS.alpha = 0.029;
+PARAMS.method = 1;
 PARAMS.d = 1;
 
-iterations = 800;
+iterations = 400;
 
 % le graphe
 zachari;
@@ -18,7 +18,7 @@ A = A + A';
 n_agents = size(A, 1);
 
 Xs = cell(iterations, 1);
-Xs{1} = rand(n_agents, PARAMS.d);
+Xs{1} = 1 * rand(n_agents, PARAMS.d);
 
 for t = 2:iterations
     % calculer N
@@ -28,10 +28,19 @@ for t = 2:iterations
 end
 
 % plotter les résultats
-res = [];
+sommes = [];
+vars = [];
 for t = 1:iterations
     somme = sum(Xs{t}, 2);
-    res(t, :) = somme;
+    sommes(t, :) = somme;
+end
+plot(sommes);
+for t = 1:iterations
+    vars(t) = var(Xs{t});
 end
 
-plot(res);
+% calculer la pente de la variance
+p = polyfit(iterations-100:iterations, log(vars(iterations-100:iterations)), 1);
+% plot(iterations-100:iterations, log(vars(iterations-100:iterations)));
+% coefficient de decroissance
+exp(p(1))
