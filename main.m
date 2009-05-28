@@ -3,13 +3,13 @@ addpath 'plot';
 
 % paramètres
 global PARAMS
-PARAMS.r = 1;
-PARAMS.rho = 0.5;
+PARAMS.r = 2;
+PARAMS.rho = 0.95;
 PARAMS.alpha = 0.029;
-PARAMS.method = 3;
+PARAMS.method = 1;
 PARAMS.d = 1;
 
-iterations = 75;
+iterations = 200;
 
 % le graphe
 zachari;
@@ -37,13 +37,13 @@ for t = 1:iterations
 end
 plot(sommes);
 colors=zeros(n_agents, 3);
-if PARAMS.d == 1 && false
-	meuh = jet;
-	c_max = max(Xs{iterations});
-	c_min = min(Xs{iterations});
-	mappp = linspace(c_min, c_max, 64);
-	interp1(mappp, meuh, Xs{iterations}); 
-	colors = meuh(Xs{iterations}',:);
+if PARAMS.d == 1
+	meuh = bone;
+	c_max = max(sommes(iterations,:));
+	c_min = min(sommes(iterations,:));
+	mapp = ceil((sommes(iterations,:) - c_min)/(c_max-c_min) * 63)+1;
+	mapp';
+	colors = meuh(mapp,:);
 	%colors = repmat(colors, 1, 3);
 	draw_dot(A, colors);
 end

@@ -138,9 +138,6 @@ p = zeros(size(x));
 t = 0:pi/30:2*pi;
 for i = 1:N
 	px = rx(i) * cos(t) + x(i);    py = ry(i) * sin(t) + y(i);
-	size(px)
-	size(py)
-	size(c(i,:))
 	p(i) = patch(px, py, c(i,:));
 end;
 
