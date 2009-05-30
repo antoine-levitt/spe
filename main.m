@@ -3,13 +3,18 @@ addpath 'plot';
 
 % paramètres
 global PARAMS
-PARAMS.r = 2;
-PARAMS.rho = 0.95;
-PARAMS.alpha = 0.029;
-PARAMS.method = 1;
+PARAMS.gstyle = 2;
+PARAMS.rho = 0.947;
+PARAMS.alpha = 0.4;
+PARAMS.method = 2;
 PARAMS.d = 1;
+PARAMS.r = 1;
 
-iterations = 200;
+format short g
+fprintf('rho:%g, alpha: %g, r: %g, d: %g\n', PARAMS.rho, PARAMS.alpha, PARAMS.r, PARAMS.d)
+format
+
+iterations = 400;
 
 % le graphe
 zachari;
@@ -24,7 +29,7 @@ for t = 2:iterations
     % calculer N
     N = neighbours(A, Xs{t-1}, t);
     % iteration
-    Xs{t} = iter(N, Xs{t-1});
+    [Xs{t}, u] = iter(N, Xs{t-1});
 end
 
 % plotter les résultats
@@ -36,10 +41,23 @@ for t = 1:iterations
 	end
 end
 
-subplot(1,2,1)
-plot(sommes);
-subplot(1,2,2)
-plotgraph(A, sommes(iterations,:));
+
+[v, d]  = eig(u);
+
+[vals, perm] = sort(diag(d));
+
+ind = perm(n_agents-2);
+disp(vals(n_agents-2))
+
+%subplot(2,2,1)
+%plot(sommes);
+%subplot(2,2,2)
+%plotgraph(A, sommes(iterations,:), cellstr(num2str((1:n_agents)')));
+%subplot(2,2,3)
+%plotgraph(N, sommes(iterations,:), cellstr(num2str((1:n_agents)')));
+%subplot(2,2,4)
+v = v(:,ind)
+plotgraph(N, v, cellstr(num2str((1:n_agents)')));
 
 
 if PARAMS.d == 1 && false
