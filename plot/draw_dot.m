@@ -42,7 +42,7 @@ if nargin == 2                                   % if no labels were provided
 end
            % now pick a healthy font size and plot 
 if n > 40, fontsz = 7; elseif n < 12, fontsz = 12; else fontsz = 9; end 
-figure; clf; axis square      %  now plot 
+%figure; clf; axis square      %  now plot 
 [x, y, h] = graph_draw(adj, colors, 'node_labels', labels, 'fontsize', fontsz, ...
                        'node_shapes', zeros(size(x,2),1), 'X', x, 'Y', y);
 delete(tmpLAYOUT); delete(tmpDOTfile);     % clean up temporary files 

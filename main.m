@@ -35,18 +35,12 @@ for t = 1:iterations
     sommes(t,i) = norm(Xs{t}(i,:));
 	end
 end
+
+subplot(1,2,1)
 plot(sommes);
-colors=zeros(n_agents, 3);
-if PARAMS.d == 1
-	meuh = bone;
-	c_max = max(sommes(iterations,:));
-	c_min = min(sommes(iterations,:));
-	mapp = ceil((sommes(iterations,:) - c_min)/(c_max-c_min) * 63)+1;
-	mapp';
-	colors = meuh(mapp,:);
-	%colors = repmat(colors, 1, 3);
-	draw_dot(A, colors);
-end
+subplot(1,2,2)
+plotgraph(A, sommes(iterations,:));
+
 
 if PARAMS.d == 1 && false
 	for t = 1:iterations
