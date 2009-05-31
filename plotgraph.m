@@ -10,6 +10,7 @@ mapp = ceil((v - c_min)/(c_max-c_min) * 63)+1;
 colors = meuh(mapp,:);
 if PARAMS.gstyle == 1
 	draw_dot(A, colors, l);
+	size(colors)
 else
 	load('xy.mat'); % specifique ZACHARI
 	x = xy(1,:);
