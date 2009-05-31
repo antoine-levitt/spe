@@ -16,4 +16,5 @@ for i = 1:length(rho)
 	end
 end
 
-surfc(rho, r, z);
+surfc(r, rho, z);
+% c'est pas a l'envers, cf HELP SURF

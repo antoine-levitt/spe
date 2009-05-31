@@ -5,7 +5,7 @@ addpath 'plot';
 
 % paramètres
 global PARAMS
-PARAMS.gstyle = 1;
+PARAMS.gstyle = 2;
 PARAMS.rho = 0.947;
 PARAMS.alpha = 0.4;
 PARAMS.method = 2;
@@ -53,7 +53,6 @@ for t = 1:iterations
 end
 
 n_clusters = n_concomp(N);
-return
 
 
 %[v, d]  = eig(u);
