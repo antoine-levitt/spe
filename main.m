@@ -13,12 +13,12 @@ PARAMS.d = 1;
 PARAMS.r = 1;
 
 if nargin==2
-	PARAMS.rho = rho;
-	PARAMS.r = r;
+    PARAMS.rho = rho;
+    PARAMS.r = r;
 end
 
 if nargin < 3
-	doplots = true;
+    doplots = true;
 end
 
 %format short g
@@ -31,25 +31,15 @@ iterations = 400;
 zachari;
 A = A + A';
 
-n_agents = size(A, 1);
-
-Xs = cell(iterations, 1);
-Xs{1} = 1 * rand(n_agents, PARAMS.d);
-
-for t = 2:iterations
-    % calculer N
-    N = neighbours(A, Xs{t-1}, t);
-    % iteration
-    [Xs{t}, u] = iter(N, Xs{t-1});
-end
+[Xs, U] = compute_model(PARAMS, 1 * rand(n_agents, PARAMS.d), iterations, A);
 
 % plotter les résultats
 sommes = [];
 vars = [];
 for t = 1:iterations
-	for i = 1:n_agents
-    sommes(t,i) = norm(Xs{t}(i,:));
-	end
+    for i = 1:n_agents
+        sommes(t,i) = norm(Xs{t}(i,:));
+    end
 end
 
 n_clusters = n_concomp(N);
@@ -71,16 +61,17 @@ n_clusters = n_concomp(N);
 %n_clusters = sum(vals==vals(n_agents-1));
 
 if doplots
-%	subplot(2,2,1)
-%	plot(sommes);
-%	subplot(2,2,2)
-%	plotgraph(A, sommes(iterations,:), cellstr(num2str((1:n_agents)')));
-%	subplot(2,2,3)
-	plotgraph(N, sommes(iterations,:), cellstr(num2str((1:n_agents)')));
-%	subplot(2,2,4)
-	%v = v(:,ind)
-%	plotgraph(N, v, cellstr(num2str((1:n_agents)')));
+    %	subplot(2,2,1)
+    %	plot(sommes);
+    %	subplot(2,2,2)
+    %	plotgraph(A, sommes(iterations,:), cellstr(num2str((1:n_agents)')));
+    %	subplot(2,2,3)
+    plotgraph(N, sommes(iterations,:), cellstr(num2str((1:n_agents)')));
+    %	subplot(2,2,4)
+    %v = v(:,ind)
+    %	plotgraph(N, v, cellstr(num2str((1:n_agents)')));
 end
+
 
 
 %if PARAMS.d == 1 && false

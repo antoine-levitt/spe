@@ -8,5 +8,5 @@ function [xtp1,u] = iter(N, X)
         [xtp1, u] = iter_m2(N,X);
       case 3
         xtp1 = iter_m3(N,X);
-		u = [1];
+        u = [1];
     end
