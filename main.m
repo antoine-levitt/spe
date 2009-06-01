@@ -1,5 +1,3 @@
-function n_clusters = main(rho, r, doplots)
-
 addpath 'graphs';
 addpath 'plot';
 
@@ -11,32 +9,18 @@ PARAMS.alpha = 0.4;
 PARAMS.method = 2;
 PARAMS.d = 1;
 PARAMS.r = 1;
-
-if nargin==2
-    PARAMS.rho = rho;
-    PARAMS.r = r;
-end
-
-if nargin < 3
-    doplots = true;
-end
-
-%format short g
-fprintf('rho:%g, alpha: %g, r: %g, d: %g\n', PARAMS.rho, PARAMS.alpha, PARAMS.r, PARAMS.d)
-%format
-
-iterations = 400;
+PARAMS.iterations = 400;
 
 % le graphe
 zachari;
 A = A + A';
 
-[Xs, U] = compute_model(PARAMS, 1 * rand(n_agents, PARAMS.d), iterations, A);
+[Xs, U] = compute_model(1 * rand(n_agents, PARAMS.d), A);
 
 % plotter les résultats
 sommes = [];
 vars = [];
-for t = 1:iterations
+for t = 1:PARAMS.iterations
     for i = 1:n_agents
         sommes(t,i) = norm(Xs{t}(i,:));
     end
@@ -44,44 +28,25 @@ end
 
 n_clusters = n_concomp(N);
 
-
-%[v, d]  = eig(u);
-%
-%[vals, perm] = sort(diag(d));
-%
-%ind = perm(n_agents-2);
-%%disp(vals(n_agents-2))
-%
-%disp(vals')
-%
-%
-%disp(eig(N)')
-%disp(sum(eig(N)==0))
-%
-%n_clusters = sum(vals==vals(n_agents-1));
-
-if doplots
-    %	subplot(2,2,1)
-    %	plot(sommes);
-    %	subplot(2,2,2)
-    %	plotgraph(A, sommes(iterations,:), cellstr(num2str((1:n_agents)')));
-    %	subplot(2,2,3)
-    plotgraph(N, sommes(iterations,:), cellstr(num2str((1:n_agents)')));
-    %	subplot(2,2,4)
-    %v = v(:,ind)
-    %	plotgraph(N, v, cellstr(num2str((1:n_agents)')));
-end
+%subplot(2,2,1)
+%plot(sommes);
+%subplot(2,2,2)
+%plotgraph(A, sommes(PARAMS.iterations,:), cellstr(num2str((1:n_agents)')));
+%subplot(2,2,3)
+plotgraph(N, sommes(PARAMS.iterations,:), cellstr(num2str((1:n_agents)')));
+%subplot(2,2,4)
+%v = v(:,ind)
+%plotgraph(N, v, cellstr(num2str((1:n_agents)')));
 
 
-
-%if PARAMS.d == 1 && false
-%	for t = 1:iterations
+%if PARAMS.d == 1
+%	for t = 1:PARAMS.iterations
 %		vars(t) = var(Xs{t});
 %	end
 %
 %	% calculer la pente de la variance
-%	p = polyfit(iterations-100:iterations, log(vars(iterations-100:iterations)), 1);
-%	% plot(iterations-100:iterations, log(vars(iterations-100:iterations)));
+%	p = polyfit(PARAMS.iterations-100:PARAMS.iterations, log(vars(PARAMS.iterations-100:PARAMS.iterations)), 1);
+%	% plot(PARAMS.iterations-100:PARAMS.iterations, log(vars(PARAMS.iterations-100:PARAMS.iterations)));
 %	% coefficient de decroissance
 %	exp(p(1))
 %end

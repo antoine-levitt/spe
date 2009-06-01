@@ -1,10 +1,11 @@
-function [Xs, U] = compute_model(PARAMS, x0, iterations, A)
+function [Xs, U] = compute_model(x0, A)
+    global PARAMS;
     n_agents = size(A, 1);
 
-    Xs = cell(iterations, 1);
+    Xs = cell(PARAMS.iterations, 1);
     Xs{1} = x0;
 
-    for t = 2:iterations
+    for t = 2:PARAMS.iterations
         % calculer N
         N = neighbours(A, Xs{t-1}, t);
         % iteration
