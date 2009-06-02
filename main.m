@@ -39,20 +39,23 @@ fprintf('%d clusters, N == A ? %d\n', full(n_clusters), full(pristine));
 %subplot(2,2,2)
 %plotgraph(A, sommes(PARAMS.iterations,:), cellstr(num2str((1:n_agents)')));
 %subplot(2,2,3)
-plotgraph(N, sommes(PARAMS.iterations,:), cellstr(num2str((1:n_agents)')));
+% plotgraph(N, sommes(PARAMS.iterations,:), cellstr(num2str((1:n_agents)')));
 %subplot(2,2,4)
 %v = v(:,ind)
 %plotgraph(N, v, cellstr(num2str((1:n_agents)')));
 
 
-%if PARAMS.d == 1
-%	for t = 1:PARAMS.iterations
-%		vars(t) = var(Xs{t});
-%	end
-%
-%	% calculer la pente de la variance
-%	p = polyfit(PARAMS.iterations-100:PARAMS.iterations, log(vars(PARAMS.iterations-100:PARAMS.iterations)), 1);
-%	% plot(PARAMS.iterations-100:PARAMS.iterations, log(vars(PARAMS.iterations-100:PARAMS.iterations)));
-%	% coefficient de decroissance
-%	exp(p(1))
-%end
+if PARAMS.d == 1
+	for t = 1:PARAMS.iterations
+		vars(t) = sqrt(var(Xs{t}));
+	end
+
+	% calculer la pente de la variance
+	p = polyfit(PARAMS.iterations-100:PARAMS.iterations, log(vars(PARAMS.iterations-100:PARAMS.iterations)), 1);
+        plot(1:PARAMS.iterations, log10(vars(1:PARAMS.iterations)));
+        hold on
+        plot(log10(PARAMS.r * (PARAMS.rho .^ (1:PARAMS.iterations))), 'r');
+	% plot(PARAMS.iterations-100:PARAMS.iterations, log10(vars(PARAMS.iterations-100:PARAMS.iterations)));
+	% coefficient de decroissance
+	exp(p(1))
+end
