@@ -2,11 +2,14 @@ function plotgraph(A, v, l)
 
 global PARAMS
 
+offset = 10;
+
 colors=zeros(length(v), 3);
 meuh = hot;
+meuh = meuh((1+offset):end,:);
 c_max = max(v);
 c_min = min(v);
-mapp = ceil((v - c_min)/(c_max-c_min) * 63)+1;
+mapp = ceil((v - c_min)/(c_max-c_min) * (63-offset))+1;
 colors = meuh(mapp,:);
 if PARAMS.gstyle == 1
 	draw_dot(A, colors, l);
