@@ -1,4 +1,4 @@
-function cc=n_concomp(A)
+function [cc, X]=n_concomp(A)
  if ~all(all(A == A'))
 	 error('Matrix is not symetric');
  end

@@ -9,5 +9,6 @@ function [Xs, U] = compute_model(x0, A)
         % calculer N
         N = neighbours(A, Xs{t-1}, t);
         % iteration
-        [Xs{t}, U] = iter(N, Xs{t-1});
+        U = iter(N);
+		Xs{t} = U * Xs{t-1};
     end

@@ -4,16 +4,18 @@ addpath 'plot';
 % paramètres
 global PARAMS
 PARAMS.gstyle = 2;
-PARAMS.rho = 0.947;
+PARAMS.rho = 0.94;
 PARAMS.alpha = 0.4;
 PARAMS.method = 2;
 PARAMS.d = 1;
-PARAMS.r = 1;
+PARAMS.r = 3;
 PARAMS.iterations = 400;
 
 % le graphe
 zachari;
 A = A + A';
+
+n_agents = size(A,1);
 
 [Xs, U] = compute_model(1 * rand(n_agents, PARAMS.d), A);
 
@@ -26,7 +28,11 @@ for t = 1:PARAMS.iterations
     end
 end
 
+N = neighbours(A, Xs{end}, PARAMS.iterations);
+pristine = all(all(A==N));
 n_clusters = n_concomp(N);
+
+fprintf('%d clusters, N == A ? %d\n', full(n_clusters), full(pristine));
 
 %subplot(2,2,1)
 %plot(sommes);
