@@ -20,12 +20,16 @@ function clusters(A, Xs, U)
             local_U = local_U(:,clusters{i}.members);
             valp = sort(eig(local_U));
             valp(abs(valp-1)<1e-10) = [];
-            fprintf('"Connectivite" pour le groupe %g : %g\n', i, valp(end));
-            fprintf('[ ');
-            for j = find(clusters{i}.members)
-                fprintf('%g ', j);
-            end
-            fprintf(']\n');
+			if (length(valp) == 0)
+				fprintf('Groupe %g (agent [%g]) isole\n', i, find(clusters{i}.members));
+			else
+				fprintf('"Connectivite" pour le groupe %g : %g\n', i, valp(end));
+				fprintf('[ ');
+				for j = find(clusters{i}.members)
+					fprintf('%g ', j);
+				end
+				fprintf(']\n');
+			end
         end
     end
     format

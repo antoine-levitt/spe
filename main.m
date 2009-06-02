@@ -4,12 +4,12 @@ addpath 'plot';
 % paramètres
 global PARAMS
 PARAMS.gstyle = 2;
-PARAMS.rho = 0.89;
+PARAMS.rho = 0.95;
 PARAMS.alpha = 0.4;
 PARAMS.method = 2;
 PARAMS.d = 1;
 PARAMS.r = 3;
-PARAMS.iterations = 300;
+PARAMS.iterations = 1000;
 
 % le graphe
 zachari;
