@@ -4,12 +4,12 @@ addpath 'plot';
 % paramètres
 global PARAMS
 PARAMS.gstyle = 2;
-PARAMS.rho = 0.95;
-PARAMS.alpha = 0.4;
-PARAMS.method = 2;
+PARAMS.rho = 0.999;
+PARAMS.alpha = 0.999;
+PARAMS.method = 5;
 PARAMS.d = 1;
-PARAMS.r = 3;
-PARAMS.iterations = 1000;
+PARAMS.r = 0.3;
+PARAMS.iterations = 300;
 
 % le graphe
 zachari;
@@ -26,4 +26,4 @@ clusters(A, Xs, U);
 evolution(A, Xs);
 
 % analyse des variances
-variances(A, Xs);
+%variances(A, Xs);
