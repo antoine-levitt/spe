@@ -3,18 +3,19 @@ addpath 'plot';
 
 % paramètres
 global PARAMS
-PARAMS.gstyle = 2;
+PARAMS.gstyle = 1;
 PARAMS.rho = 0.915;
-PARAMS.alpha = 0.999;
-PARAMS.method = 5;
-PARAMS.d = 4;
+PARAMS.alpha = 0.4;
+PARAMS.method = 2;
+PARAMS.d = 1;
 PARAMS.r = 1;
 PARAMS.iterations = 400;
-PARAMS.distrib = 'gauss';
+PARAMS.distrib = 'uni';
 
 % le graphe
-zachari;
-A = A + A';
+%zachari;
+%A = A + A';
+A = load_dotdot('graphs/dolphins.dot');
 n_agents = size(A,1);
 
 switch PARAMS.distrib

@@ -13,9 +13,9 @@ mapp = ceil((v - c_min)/(c_max-c_min) * (63-offset))+1;
 colors = meuh(mapp,:);
 if PARAMS.gstyle == 1
 	draw_dot(A, colors, l);
-	size(colors)
 else
 	load('xy.mat'); % specifique ZACHARI
+	load('dolphins-xy.mat'); % specifique Dauphins
 	x = xy(1,:);
 	y = xy(2,:);
 	graph_draw(A, colors, 'node_labels', l, 'fontsize', 9, 'node_shapes', zeros(size(x,2),1), 'X', x, 'Y', y);

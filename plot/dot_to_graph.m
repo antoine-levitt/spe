@@ -26,9 +26,9 @@ function [Adj, labels, x, y] = dot_to_graph(filename)
 %  & Alexi Savov:  asavov @ wustl.edu |  http://artsci.wustl.edu/~azsavov
 
        %  UNCOMMENT, but beware -- SLOW CHECK !!!! 
-%if ~exist(filename)                % Checks whether the specified file exists.
-%   error('* * * File does not exist or could not be found. * * *');     return;
-%end;     
+if ~exist(filename)                % Checks whether the specified file exists.
+   error('* * * File does not exist or could not be found. * * *');     return;
+end;
 
 lines = textread(filename,'%s','delimiter','\n','commentstyle','c');  % Read file into cell array of lines
 dot_lines = strvcat(lines);                                           % ignoring C-style comments
