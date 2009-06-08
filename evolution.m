@@ -11,8 +11,10 @@ function evolution(A, Xs)
     end
 
 	subplot(1,2,1)
+	hold off
     plot(visu);
 	subplot(1,2,2)
+	cla
     plotgraph(N, visu(PARAMS.iterations,:), cellstr(num2str((1:n_agents)')));
     
     %subplot(2,2,2)

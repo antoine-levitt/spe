@@ -2,9 +2,9 @@
 function N = neighbours(A, x, t)
     global PARAMS;
 	switch PARAMS.method
-	case {1, 2, 3, 5}
+	case {1, 2, 3}
 		upper_bound = PARAMS.r * PARAMS.rho ^ (t-1);
-	case 4
+	case {4, 5}
 		upper_bound = PARAMS.r;
 	end
     N = full(A);

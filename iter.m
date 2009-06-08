@@ -35,10 +35,11 @@ function [U, V] = iter(N, t)
 		% correction avec le voisinage, pondéré par alpha fonction de t
 		n = size(N, 1);
 		L = diag(sum(N)) - N;
-		U = (eye(n) - give_me_alpha(t) * L);
+		U = (eye(n) - PARAMS.r*give_me_alpha(t) * L);
 		V = zeros(n, PARAMS.d);
 	end
 
 function a = give_me_alpha(t)
     global PARAMS;
-	a=1/t;
+	a=min([1 1/log(t+1)]);
+	%a=PARAMS.alpha.^t;
