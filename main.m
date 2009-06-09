@@ -3,19 +3,25 @@ addpath 'plot';
 
 % paramètres
 global PARAMS
-PARAMS.gstyle = 1;
-PARAMS.rho = 0.915;
-PARAMS.alpha = 0.4;
-PARAMS.method = 2;
+PARAMS.gstyle = 2;
+PARAMS.rho = 0.98;
+PARAMS.alpha = 0.01;
+PARAMS.method = 1;
 PARAMS.d = 1;
 PARAMS.r = 1;
 PARAMS.iterations = 400;
 PARAMS.distrib = 'uni';
+PARAMS.graph = 'zachari';
 
 % le graphe
-%zachari;
-%A = A + A';
-A = load_dotdot('graphs/dolphins.dot');
+switch PARAMS.graph
+	case 'dolph'
+	A = load_dotdot('graphs/dolphins.dot');
+	case 'zachari'
+	zachari;
+	A = A + A';
+end
+
 n_agents = size(A,1);
 
 switch PARAMS.distrib
@@ -33,12 +39,14 @@ end
 
 %les calculs
 [Xs, U] = compute_model(x0, A);
+[i, B] = break_graph_eig(A);
+disp(i)
 
 % analyse de clusters
 clusters(A, Xs, U);
 
 % évolution temporelle
-evolution(A, Xs);
+evolution(A, Xs, i, B);
 
 % analyse des variances
 %variances(A, Xs);

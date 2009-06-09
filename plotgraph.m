@@ -14,8 +14,12 @@ colors = meuh(mapp,:);
 if PARAMS.gstyle == 1
 	draw_dot(A, colors, l);
 else
-	load('xy.mat'); % specifique ZACHARI
-	load('dolphins-xy.mat'); % specifique Dauphins
+	switch PARAMS.graph
+		case 'zachari'
+		load('xy.mat'); % specifique ZACHARI
+		case 'dolph'
+		load('dolphins-xy.mat'); % specifique Dauphins
+	end
 	x = xy(1,:);
 	y = xy(2,:);
 	graph_draw(A, colors, 'node_labels', l, 'fontsize', 9, 'node_shapes', zeros(size(x,2),1), 'X', x, 'Y', y);
