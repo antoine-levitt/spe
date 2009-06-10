@@ -3,7 +3,7 @@ function [node_list, B] = break_graph_eig(A)
 	global PARAMS
 
 	% utiliser la Laplacienne, pas la matrice d'iteration
-	laplace = true;
+	laplace = 0;
 
 	% séparer selon le plus grand écart, pas en 0
 	max_gap = 1;
@@ -22,7 +22,6 @@ function [node_list, B] = break_graph_eig(A)
 	vectp = vectp(:, perm);
 
 	if laplace
-		disp(valp')
 		valp=valp(2);
 		vectp = vectp(:,2);
 	else
@@ -46,6 +45,8 @@ function [node_list, B] = break_graph_eig(A)
 
 			node_list{1} = find(vectp(:,end) > threshold);
 			node_list{2} = find(vectp(:,end) <= threshold);
+
+			i_max
 		else
 			node_list{1} = find(vectp(:,end) > 0);
 			node_list{2} = find(vectp(:,end) <= 0);
