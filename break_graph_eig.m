@@ -11,7 +11,7 @@ function [node_list, B] = break_graph_eig(A)
     if laplace
         U = full(diag(sum(A))-A);
     else
-        U = iter(A, 1);
+        U = iter(A);
     end
 
 
