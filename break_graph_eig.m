@@ -2,20 +2,16 @@ function [node_list, B] = break_graph_eig(A)
 
 	global PARAMS
 
-
-	[node_list, B] = recursive_break(U, valp, vectp)
-	
-function [node_list, B, max_vp] = recursive_break(A, valp, vectp)
-
-	global PARAMS
-
+	% utiliser la Laplacienne, pas la matrice d'iteration
 	laplace = true;
+
+	% séparer selon le plus grand écart, pas en 0
 	max_gap = 1;
 
 	if laplace
-		U = iter(A, 1);
-	else
 		U = full(diag(sum(A))-A);
+	else
+		U = iter(A, 1);
 	end
 
 	
@@ -26,12 +22,12 @@ function [node_list, B, max_vp] = recursive_break(A, valp, vectp)
 	vectp = vectp(:, perm);
 
 	if laplace
+		disp(valp')
 		valp=valp(2);
 		vectp = vectp(:,2);
 	else
 		valp(abs(valp-1)<1e-10) = [];
 		vectp(:, (length(valp)+1):end) = [];
-
 		valp(valp < PARAMS.rho) = [];
 		vectp(:, 1:(size(vectp, 2)-length(valp))) = [];
 	end
@@ -44,9 +40,9 @@ function [node_list, B, max_vp] = recursive_break(A, valp, vectp)
 		B = A;
 		
 		if max_gap
-			sorted_vectp = sort(vectp);
-			[dummy, i_max] = max(abs(sorted_vectp(:,(2:end)) - sorted_vectp(:,(1:(end-1)))));
-			threshold = sorted_vectp(:,i_max);
+			sorted_vectp = sort(vectp(:,end));
+			[dummy, i_max] = max(abs(sorted_vectp(2:end) - sorted_vectp(1:(end-1))));
+			threshold = sorted_vectp(i_max);
 
 			node_list{1} = find(vectp(:,end) > threshold);
 			node_list{2} = find(vectp(:,end) <= threshold);
@@ -55,15 +51,11 @@ function [node_list, B, max_vp] = recursive_break(A, valp, vectp)
 			node_list{2} = find(vectp(:,end) <= 0);
 		end
 
-		B1(:, node_list{2}) = 0;
-		B1(node_list{2}, :) = 0;
-
-		B2(:, node_list{1}) = 0;
-		B2(node_list{1}, :) = 0;
+		for i = node_list{1}
+			B(node_list{2}, i) = 0;
+			B(i, node_list{2}) = 0;
+		end
 	end
-
-
-
 
 
 	if length(valp) > 1
@@ -71,3 +63,5 @@ function [node_list, B, max_vp] = recursive_break(A, valp, vectp)
 		disp(valp)
 		error('!');
 	end
+
+
