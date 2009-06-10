@@ -29,14 +29,14 @@ function [U] = iter(N)
         %matrice de modularite
         n = size(N, 1);
         d = sum(N);
-        P = d * d' ./ 2 ./ sum(d) - N;
+        P = d' * d ./ sum(d) - N;
         U = eye(n, n) - PARAMS.alpha * P;
         
       case 5
         %matrice de modularite normée
         n = size(N, 1);
         d = sum(N);
-        P = d * d' ./ 2 ./ sum(d) - N;
+        P = d' * d ./ sum(d) - N;
         d = d + (d == 0);
         U = eye(n, n) - PARAMS.alpha * diag(d.^(-1)) * P;
     end

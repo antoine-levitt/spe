@@ -9,7 +9,7 @@ function clusters(A, Xs, U)
     % calcule les connectivités des différents clusters
     format short g
     fprintf('%d clusters, N == A ? %d\n', full(n_clusters), full(pristine));
-    valp = sort(eig(iter(A, PARAMS.iterations)));
+    valp = sort(eig(iter(A)));
     valp(abs(valp-1)<1e-10) = [];
     fprintf('"Connectivite" de A: %g (rho : %g)\n', valp(end), PARAMS.rho);
     fprintf('----------------------------------\n');
