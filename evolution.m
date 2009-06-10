@@ -11,19 +11,19 @@ function evolution(A, Xs, node_list, B)
     end
 
 
-	subplot(2,1,2)
-	hold off
+    subplot(2,1,2)
+    hold off
     plot(visu);
-	subplot(2,2,1)
-	cla
+    subplot(2,2,1)
+    cla
     plotgraph(N, visu(PARAMS.iterations,:), cellstr(num2str((1:n_agents)')));
-	subplot(2,2,2)
-	cla
-	for i = 1:length(node_list)
-		eigcolors(node_list{i},:) = i;
-	end
+    subplot(2,2,2)
+    cla
+    for i = 1:length(node_list)
+        eigcolors(1, node_list{i}) = i;
+    end
     plotgraph(B, eigcolors, cellstr(num2str((1:n_agents)')));
-    
+
     %subplot(2,2,2)
     %plotgraph(A, visu(PARAMS.iterations,:), cellstr(num2str((1:n_agents)')));
     %subplot(2,2,4)
