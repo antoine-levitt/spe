@@ -20,7 +20,7 @@ function evolution(A, Xs, node_list, B)
 	subplot(2,2,2)
 	cla
 	for i = 1:length(node_list)
-		eigcolors(1, node_list{i}) = i;
+		eigcolors(node_list{i},:) = i;
 	end
     plotgraph(B, eigcolors, cellstr(num2str((1:n_agents)')));
     

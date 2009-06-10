@@ -9,8 +9,12 @@ meuh = hot;
 meuh = meuh((1+offset):end,:);
 c_max = max(v);
 c_min = min(v);
-mapp = ceil((v - c_min)/(c_max-c_min) * (63-offset))+1;
-colors = meuh(mapp,:);
+if c_min == c_max
+	colors((1:length(v)), :) = repmat(meuh(1, :), length(v), 1);
+else
+	mapp = ceil((v - c_min)/(c_max-c_min) * (63-offset))+1;
+	colors = meuh(mapp,:);
+end
 if PARAMS.gstyle == 1
 	draw_dot(A, colors, l);
 else

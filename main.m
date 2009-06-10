@@ -4,14 +4,14 @@ addpath 'plot';
 % paramètres
 global PARAMS
 PARAMS.gstyle = 2;
-PARAMS.rho = 0.99;
-PARAMS.alpha = 0.05;
+PARAMS.rho = 0.92;
+PARAMS.alpha = 0.08;
 PARAMS.method = 1;
 PARAMS.d = 1;
 PARAMS.r = 3;
 PARAMS.iterations = 400;
 PARAMS.distrib = 'uni';
-PARAMS.graph = 'dolph';
+PARAMS.graph = 'zachari';
 
 % le graphe
 switch PARAMS.graph
@@ -39,8 +39,7 @@ end
 
 %les calculs
 [Xs, U] = compute_model(x0, A);
-[i, B] = break_graph_eig(A);
-disp(i)
+[i, B] = break_recu(A);
 
 % analyse de clusters
 clusters(A, Xs, U);
