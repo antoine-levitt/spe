@@ -1,7 +1,16 @@
 function [node_list, B] = break_graph_eig(A)
 
 	global PARAMS
+
+
+	[node_list, B] = recursive_break(U, valp, vectp)
+	
+function [node_list, B, max_vp] = recursive_break(A, valp, vectp)
+
+	global PARAMS
+
 	laplace = true;
+	max_gap = 1;
 
 	if laplace
 		U = iter(A, 1);
@@ -27,27 +36,32 @@ function [node_list, B] = break_graph_eig(A)
 		vectp(:, 1:(size(vectp, 2)-length(valp))) = [];
 	end
 
-function node_list = recursive_break
-	global PARAMS
-	
 	if length(valp) == 0
-		node_list{1} = 1:length(U);
+		node_list{1} = 1:length(A);
 		B = A;
 		return
-	end
-
-	if length(valp) == 1
-		disp(vectp')
-
+	else
 		B = A;
-		node_list{1} = find(vectp > 0);
-		node_list{2} = find(vectp <= 0);
-		for i = node_list{1}
-			B(i, node_list{2}) = 0;
-			B(node_list{2}, i) = 0;
-			return
+		
+		if max_gap
+			sorted_vectp = sort(vectp);
+			[dummy, i_max] = max(abs(sorted_vectp(:,(2:end)) - sorted_vectp(:,(1:(end-1)))));
+			threshold = sorted_vectp(:,i_max);
+
+			node_list{1} = find(vectp(:,end) > threshold);
+			node_list{2} = find(vectp(:,end) <= threshold);
+		else
+			node_list{1} = find(vectp(:,end) > 0);
+			node_list{2} = find(vectp(:,end) <= 0);
 		end
+
+		B1(:, node_list{2}) = 0;
+		B1(node_list{2}, :) = 0;
+
+		B2(:, node_list{1}) = 0;
+		B2(node_list{1}, :) = 0;
 	end
+
 
 
 
