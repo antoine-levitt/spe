@@ -87,7 +87,7 @@ dauphins, il a été observé une partition des dauphins au départ
 de l'un d'entre eux, ce qui fournit une base expérimentale à
 notre étude.
 
-\subsection{Modèles de création de consensus}
+\subsection{Modélisation par équation différentielle}
 Étant donné un vecteur d'opinions initiales $x^0$, on
 s'intéresse à l'évolution de ces opinions dans différents
 modèles. Le modèle de base est l'équation différentielle
@@ -101,19 +101,58 @@ On peut interpréter cette équation en la réécrivant sous forme scalaire :
   \label{eq_diff_scal}
   \dot {x}_i = \sum_{j \in N_i} (x_j - x_i),
 \end{equation}
-où $N_i$ est le voisinage de $i$, c'est à dire tous les noeuds
-qui lui sont adjacents. Chaque personne révise son opinion en
-fonction de celle de ses voisins. Intuitivement, on s'attend à
-ce que ce modèle provoque une convergence vers un
-consensus. Cette intuition est corroborée par la ressemblance de
-(\ref{eq_diff}) avec l'équation de la chaleur, dont les
-propriétés de convergence vers la valeur moyenne sont bien
-connues. En fait, dans le cas d'un graphe représentant un espace
-discrétisé, (\ref{eq_diff}) est tout simplement la
-discrétisation par différences finies de l'équation de la
-chaleur.
+où $N_i$ est le voisinage de $i$, c'est à dire tous les noeuds qui lui
+sont adjacents. Chaque personne révise son opinion en fonction de
+celle de ses voisins. Intuitivement, on s'attend à ce que ce modèle
+provoque une convergence vers un consensus. Cette intuition est
+corroborée par la ressemblance de (\ref{eq_diff}) avec l'équation de
+la chaleur, dont les propriétés de convergence vers la valeur moyenne
+sont bien connues. En fait, dans le cas d'un graphe représentant un
+espace discrétisé, (\ref{eq_diff}) est tout simplement la
+discrétisation par différences finies de l'équation de la chaleur. On
+va démontrer ces propriétés de convergence.
 
 \subsection{Propriétés spectrales de $L$}
+$L$ est symétrique donc diagonalisable dans une base orthonormée de
+vecteurs propres $(v_i)_{i=1\dots n}$ associés à des valeurs propres
+$(\lambda_i)_{i=1 \dots n}$. On décompose $x^0$ sur cette base : $x^0
+= \sum_{i=1}^n \alpha_i v_i$, et la solution de (\ref{eq_diff}) ayant
+cette condition initiale est $x(t) = \sum_{i=1}^n \alpha_i e^{-
+  \lambda_i t} v_i$. L'étude de la convergence de l'équation
+différentielle passe donc par l'étude des valeurs propres de $L$.
+
+La somme des lignes de $L$ est égale à $0$ (par définition du degré),
+c'est-à-dire que $(1, 1, \dots, 1)^T$ est vecteur propre pour la valeur
+$0$. On va montrer que $L$ est positive, c'est-à-dire que toutes ses
+valeurs propres sont positives. Pour cela, on utilise la
+caractérisation : une matrice est positive ssi $x^T L x \geq 0$ pour
+tout $x \in \R^n$.
+
+\begin{eqnarray*}
+  x^T L x & = & \sum_{i = 1}^n x_i \sum_{j \in N_i} (x_i - x_j) \\
+          & = & \sum_{i = 1}^n d_i x_i^2 - \sum_{i = 1}^n \sum_{j \in N_i} x_i x_j \\
+          & = & \sum_{v \in V} (x_i^2 + x_j^2) + \sum_{v \in V} 2 x_i x_j \\
+          & = & \sum_{v \in V} (x_i - x_j)^2 \\
+          & \geq & 0
+\end{eqnarray*}
+
+$L$ est donc positive. On voit également qu'un vecteur propre associé
+à la valeur propre $0$ a la même valeur sur tous les noeuds d'une
+composante connexe. La multiplicité de $0$ comme valeur propre est
+donc égale au nombre de composantes connexes dans le graphe. On ne
+considère ici que des graphes connexes, donc on peut ranger les
+valeurs propres : $\lambda_1 = 0 < \lambda_2 \leq \lambda_3 \leq \dots
+\leq \lambda_n$. Le comportement en l'infini de (\ref{eq_diff}) est
+donc trivial : il converge vers $(\alpha_1, \alpha_1, \dots,
+\alpha_1)^T$ qui n'est autre que la valeur moyenne de $x^0$. La
+vitesse de convergence est dictée par la deuxième valeur propre
+$\lambda_2$ : $||x(t) - x_\infty|| \approx e^{-\lambda_2 t}$. Cette
+valeur propre est appellée connectivité algébrique, et mesure à quel
+point un graphe est connecté. Notons aussi que $x(t) - x_\infty$
+s'aligne sur le second vecteur propre $v_2$.
+
+\subsection{Modèle discret}
+
 \section{Analyse spectrale de graphes et partitionnement}
 
 \begin{thebibliography}{2}
