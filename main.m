@@ -4,9 +4,9 @@ addpath 'plot';
 % paramètres
 global PARAMS
 PARAMS.gstyle = 2;
-PARAMS.rho = 0.937;
-PARAMS.alpha = 0.4;
-PARAMS.method = 2;
+PARAMS.rho = 0.951;
+PARAMS.alpha = 0.08;
+PARAMS.method = 1;
 PARAMS.d = 1;
 PARAMS.r = 3;
 PARAMS.iterations = 400;
@@ -17,6 +17,8 @@ PARAMS.max_gap = 0;
 
 % le graphe
 switch PARAMS.graph
+	case 'donjon'
+	A = load_dotdot('graphs/dungeon_graph.dot');
 	case 'dolph'
 	A = load_dotdot('graphs/dolphins.dot');
 	case 'zachari'

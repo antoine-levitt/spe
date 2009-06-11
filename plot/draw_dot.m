@@ -41,7 +41,7 @@ x = x(lbl_ndx); y = y(lbl_ndx);
 if n > 40, fontsz = 7; elseif n < 12, fontsz = 12; else fontsz = 9; end 
 %figure; clf; axis square      %  now plot 
 %xy=[x;y];
-%save('dolphins-xy.mat', 'xy');
+%save('dungeon-xy.mat', 'xy');
 if ~exist('colors')
 	colors = ones(length(adj), 3)	
 end

@@ -19,6 +19,8 @@ if PARAMS.gstyle == 1
 	draw_dot(A, colors, l);
 else
 	switch PARAMS.graph
+		case 'donjon'
+		load('dungeon-xy.mat'); % specifique donjon
 		case 'zachari'
 		load('xy.mat'); % specifique ZACHARI
 		case 'dolph'
