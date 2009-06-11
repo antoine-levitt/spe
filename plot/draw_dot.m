@@ -37,14 +37,17 @@ if nam_len < n  % plot singletons without coordinates all together in a lower le
 end
 [ignore,lbl_ndx] = sort(num_names);  % recover from dot_to_graph node_ID permutation 
 x = x(lbl_ndx); y = y(lbl_ndx);  
-if nargin == 2                                   % if no labels were provided 
-    labels = names(lbl_ndx);
-end
            % now pick a healthy font size and plot 
 if n > 40, fontsz = 7; elseif n < 12, fontsz = 12; else fontsz = 9; end 
 %figure; clf; axis square      %  now plot 
 %xy=[x;y];
 %save('dolphins-xy.mat', 'xy');
+if ~exist('colors')
+	colors = rand(length(adj), 3)	
+end
+if ~exist('labels')
+    labels = names(lbl_ndx);
+end
 [x, y, h] = graph_draw(adj, colors, 'node_labels', labels, 'fontsize', fontsz, ...
                        'node_shapes', zeros(size(x,2),1), 'X', x, 'Y', y);
 delete(tmpLAYOUT); delete(tmpDOTfile);     % clean up temporary files 

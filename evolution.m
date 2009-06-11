@@ -1,5 +1,5 @@
 % visualisation des résultats
-function evolution(A, Xs)
+function evolution(A, Xs, node_list, B)
     global PARAMS;
     N = neighbours(A, Xs{end}, PARAMS.iterations);
     n_agents = length(A);
@@ -10,13 +10,20 @@ function evolution(A, Xs)
         end
     end
 
-	subplot(1,2,1)
-	hold off
+
+    subplot(2,1,2)
+    hold off
     plot(visu);
-	subplot(1,2,2)
-	cla
+    subplot(2,2,1)
+    cla
     plotgraph(N, visu(PARAMS.iterations,:), cellstr(num2str((1:n_agents)')));
-    
+    subplot(2,2,2)
+    cla
+    for i = 1:length(node_list)
+        eigcolors(1, node_list{i}) = i;
+    end
+    plotgraph(B, eigcolors, cellstr(num2str((1:n_agents)')));
+
     %subplot(2,2,2)
     %plotgraph(A, visu(PARAMS.iterations,:), cellstr(num2str((1:n_agents)')));
     %subplot(2,2,4)
