@@ -43,7 +43,7 @@ if n > 40, fontsz = 7; elseif n < 12, fontsz = 12; else fontsz = 9; end
 %xy=[x;y];
 %save('dolphins-xy.mat', 'xy');
 if ~exist('colors')
-	colors = rand(length(adj), 3)	
+	colors = ones(length(adj), 3)	
 end
 if ~exist('labels')
     labels = names(lbl_ndx);
