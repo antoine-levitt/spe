@@ -4,16 +4,16 @@ addpath 'plot';
 % paramètres
 global PARAMS
 PARAMS.gstyle = 2;
-PARAMS.rho = 0.91;
-PARAMS.alpha = 0.4;
+PARAMS.rho = .978;
+PARAMS.alpha = .45;
 PARAMS.method = 2;
-PARAMS.d = 2;
-PARAMS.r = 8;
-PARAMS.iterations = 400;
+PARAMS.d = 1;
+PARAMS.r = 5;
+PARAMS.iterations = 200;
 PARAMS.distrib = 'uni';
-PARAMS.graph = 'zachari';
+PARAMS.graph = 'dolph';
 PARAMS.laplace = 0;
-PARAMS.max_gap = 1;
+PARAMS.max_gap = 0;
 
 % le graphe
 switch PARAMS.graph
