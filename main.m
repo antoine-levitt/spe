@@ -4,16 +4,16 @@ addpath 'plot';
 % paramètres
 global PARAMS
 PARAMS.gstyle = 2;
-PARAMS.rho = 0.951;
-PARAMS.alpha = 0.08;
-PARAMS.method = 1;
-PARAMS.d = 1;
-PARAMS.r = 3;
+PARAMS.rho = 0.91;
+PARAMS.alpha = 0.4;
+PARAMS.method = 2;
+PARAMS.d = 2;
+PARAMS.r = 8;
 PARAMS.iterations = 400;
 PARAMS.distrib = 'uni';
 PARAMS.graph = 'zachari';
 PARAMS.laplace = 0;
-PARAMS.max_gap = 0;
+PARAMS.max_gap = 1;
 
 % le graphe
 switch PARAMS.graph
@@ -42,6 +42,7 @@ case 'gauss'
 end
 
 %les calculs
+Xs=[];
 [Xs, U] = compute_model(x0, A);
 [i, B] = break_recu(A);
 

@@ -27,6 +27,7 @@ function [node_list, B] = break_recu(A, recursing, laplace_max_clusters)
 
 	[valp, perm] = sort(valp);
 	vectp = vectp(:, perm);
+	disp(valp')
 
 	if length(valp) == 1
 		node_list{1} = 1:length(A);
