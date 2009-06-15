@@ -305,10 +305,10 @@ méthodes classiques de partitionnement.
 
 Le problème à résoudre est : étant donné un graphe, comment le
 partitionner de la façon la plus naturelle possible ? Évidemment, il
-faut tout d'abord définir rigoureusement ce qu'on entend par
-``naturelle''. Un critère qui peut être intéressant est le nombre
-d'arêtes entre les deux groupes : on cherche la partition de $E$ en
-deux groupes $E_1$ et $E_2$ qui minimise ce nombre d'arêtes $n_a$.
+faut tout d'abord définir ce qu'on entend par ``naturelle''. Un
+critère qui peut être intéressant est le nombre d'arêtes entre les
+deux groupes : on cherche la partition de $E$ en deux groupes $E_1$ et
+$E_2$ qui minimise ce nombre d'arêtes $n_a$.
 
 On note $x_p$ le vecteur caractérisant cette partition : il vaut 1 sur
 $E_1$ et 0 sur $E_2$. Par le calcul mené au \ref{props_spectrales_L},
@@ -353,7 +353,17 @@ chercher le vecteur $x$ de $\{0,1\}^n$ qui maximise le parallélisme
 $(x|v_2)$ avec $v2$, ce qui conduit à mettre les entrées positives de
 $v_2$ dans $E_1$ et les négatives dans $E_2$, ou le contraire.
 
-Modèle normalisé, fonction objectif, partitionnement spectral, (modularité ?)
+Cette solution donne de bons résultats approchés pour le problème de
+minimisation. Un avantage est qu'il existe des algorithmes efficaces
+pour calculer $v_2$ (basés sur la méthode des
+puissances). Typiquement, pour un graphe non pathologique (nombre
+d'arêtes de l'ordre du nombre de noeuds), l'algorithme de
+partitionnement est en $\mathcal O(n^2)$.
+
+L'inconvénient de cette méthode est qu'elle cherche uniquement à
+minimiser le nombre d'arcs entre les groupes. Elle risque donc
+d'isoler de très petits groupements. Pour pallier à ce défaut, on
+utilise donc BLABLA renormalisé.
 
 \begin{thebibliography}{2}
 \bibitem{zachary} W. W. Zachary, An information flow model for conflict and fission in small groups, Journal of Anthropological Research 33, 452-473 (1977)
