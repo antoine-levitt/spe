@@ -10,6 +10,9 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 
+\def\fig#1{Fig.~\ref{#1}}
+\def\eq#1{(\ref{#1})}
+
 \newtheorem{theorem}{Théorème}
 \newtheorem{definition}{Définition}
 
@@ -68,14 +71,14 @@ notre étude.
 s'intéresse à l'évolution de ces opinions dans différents
 modèles. Le modèle de base est l'équation différentielle
 \begin{equation}
-  \label{eq_diff}
-  \dot x + L x = 0.
+ \label{eq_diff}
+ \dot x + L x = 0.
 \end{equation}
 
 On peut interpréter cette équation en la réécrivant sous forme scalaire :
 \begin{equation}
-  \label{eq_diff_scal}
-  \dot {x}_i = \sum_{j \in N_i} (x_j - x_i),
+ \label{eq_diff_scal}
+ \dot {x}_i = \sum_{j \in N_i} (x_j - x_i),
 \end{equation}
 où $N_i$ est le voisinage de $i$, c'est à dire tous les noeuds qui lui
 sont adjacents. Chaque personne révise son opinion en fonction de
@@ -95,7 +98,7 @@ vecteurs propres $(v_i)_{i=1\dots n}$ associés à des valeurs propres
 $(\lambda_i)_{i=1 \dots n}$. On décompose $x^0$ sur cette base : $x^0
 = \sum_{i=1}^n \alpha_i v_i$, et la solution de (\ref{eq_diff}) ayant
 cette condition initiale est $x(t) = \sum_{i=1}^n \alpha_i e^{-
-  \lambda_i t} v_i$. L'étude de la convergence de l'équation
+ \lambda_i t} v_i$. L'étude de la convergence de l'équation
 différentielle passe donc par l'étude des valeurs propres de $L$.
 
 La somme des lignes de $L$ est égale à $0$ (par définition du degré),
@@ -131,6 +134,7 @@ s'aligne sur le second vecteur propre $v_2$ : $x(t) - x_\infty \approx
 suite.
 
 \subsection{Modèle discret}
+\label{mod_discret}
 Plutôt que de simuler ce modèle directement, on va utiliser un modèle
 discrétisé, qui a sensiblement les même propriétés tout en étant plus
 facile à étudier. Ce modèle permet notamment de rajouter des effets
@@ -139,13 +143,13 @@ qui seraient plus délicats à manipuler, comme on le verra section
 sur (\ref{eq_diff}), qui donne la relation de récurrence en l'indice
 discret $t$ :
 \begin{equation}
-  \label{eq_discrete}
-  x(t+1) = x(t) - \alpha L x(t),
+ \label{eq_discrete}
+ x(t+1) = x(t) - \alpha L x(t),
 \end{equation}
 ou sous forme scalaire :
 \begin{equation}
-  \label{eq_discrete_scal}
-  x_i(t) = x_i(t) + \alpha \sum_{j \in N_i} (x_j(t) - x_i(t)).
+ \label{eq_discrete_scal}
+ x_i(t) = x_i(t) + \alpha \sum_{j \in N_i} (x_j(t) - x_i(t)).
 \end{equation}
 
 On retrouve l'idée de l'équation précédente : à chaque étape, chaque
@@ -197,33 +201,103 @@ $\lambda_2^1$ et $\lambda_2^2$ (les connectivités algébriques des
 sous-graphes), et le même raisonnement s'applique pour
 éventuellement encore diviser ces communautés.
 
-\subsection{Résultats}
-\paragraph{Graphes utilisés}
-On utilise principalement deux graphes, représentés figure
-\ref{graphes}.  Le premier est le réseau d'amitié dans un club de
-karaté d'une université américaine dans les années 70, contenant 34
-membres \cite{zachary}. Le second est le graphe d'interactions d'une
-communauté de 62 dauphins \cite{dolphins}.
+\section{Résultats}
+Nous avons implémenté ce modèle en \textsc{MATLAB}, nous présentons ici
+les principaux résultats.
+
+
+\subsection{Graphes utilisés}
+Nous cherchons des communautés apparaissant dans la réalité, dans ce but
+nous utilisons des graphes réels. Des graphes aléatoires ne présentent pas
+a priori une telle structure.
+
+Nous utilisons principalement deux graphes, représentés \fig{exemples_graphes}. Le premier
+est le réseau d'amitié dans un club de karaté d'une université américaine dans les années
+70, contenant 34 membres \cite{zachary}. Le second est le graphe d'interactions d'une
+communauté de 62 dauphins \cite{dolphins}. Il a été observé une séparation de ce groupe
+après le départ d'un individu clé.
 
 \begin{figure}[htb]
-  \centering
-  (a)
-  \includegraphics[width=.4 \textwidth]{zachary}
-  (b)
-  \includegraphics[width=.4 \textwidth]{dolphins}
-  \caption{Club de karaté de Zachary (a), et communauté de dauphins (b).}
-  \label{graphes}
+	\begin{center}
+		\includegraphics[width=.4 \textwidth]{zachary}
+		\includegraphics[width=0.4\textwidth]{dolphins}\\
+		\hfill (a) \hfill (b) \hfill~\\
+	\end{center}
+	\caption{Club de karaté (a), et dauphins (b).}
+	\label{exemples_graphes}
 \end{figure}
 
-Ces graphes ont été choisis parce qu'ils possèdent des
-structures de communauté qu'on peut mettre en évidence plus
-facilement que sur un graphe aléatoire. Sur la communauté de
-dauphins, il a été observé une partition des dauphins au départ
-de l'un d'entre eux, ce qui fournit une base expérimentale à
-notre étude.
+\subsection{Choix des paramètres}
+Les opinions initiales sont tirés selon une loi uniforme sur $[0; 1]$.
+$R$ est choisi relativement grand devant la taille de la distribution initiale
+($R\approx10$) pour éviter l'influence lors de la phase transitoire. Enfin, $\alpha$
+est choisi de manière à avoir une simulation stable (voir section \ref{mod_discret}).
+En pratique, on a $\alpha = 0,08$ pour le graphe Zachary et $\alpha = 0,4$ pour les
+dauphins. On effectue $\approx 400$ itérations, les résultats sont alors peu variants,
+et la simulation rapide.
 
-\paragraph{Résultats numériques}
-Variance (pb numériques), évolution, clusterisation
+\subsection{Détection des groupes} Sans s'attacher à une définition formelle de la notion
+de communauté (qui peut être complexe) on peut définir un groupe. À l'instant $t$, on
+considère graphe partiel $N'(t) = \bigcup_i N'_i(t)$. Ce graphes présente une ou plusieurs
+composantes connexes, qui représentes les ensembles d'agents communiquant encore entre eux
+(directement ou pas) à l'instant $t$. Ces
+
+\subsection{Résultats numériques} Nous commençons par analyser les résultats qualitatifs
+pour le modèle, avec $\rho$ de l'ordre de $\lambda_2$. On observe des groupes au sein
+desquels l'opinion est globalement homogène. Cette structure de groupe semble être peu
+sensible à la répartition initiale des opinions puisqu'elle apparaît très souvent sur
+plusieurs simulations (voir \fig{res_3cs}).
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=.4\textwidth]{za-m1-3}
+		\includegraphics[width=.4\textwidth]{do-m1-3}
+		\caption{Exemple de groupes apparaissant lors de la simulation}
+		\label{res_3cs}
+	\end{center}
+\end{figure}
+
+Remarque : certains groupes sont relativement petits devant d'autre.
+
+\subparagraph{Influence du forçage}
+
+Maintenant nous nous intéressons à la bifurcation introduite en section \ref{forcage}.
+Pour ceci nous calculons le nombre de groupes quand $\rho$ \emph{diminue}
+(\fig{bifu_map}). $R$ est maintenu fixé, il n'a pas d'influence visible sur les résultats.
+Nous utiliseons le graphe de Zachary, pour lequel $\lambda_2 \approx 0,9471$.
+Le nombre de groupe est calculé en faisant la moyenne sur 10 simulations.
+
+\begin{figure}[htb]
+	\begin{center}
+		%\includegraphics[width=\textwidth]{do-m1-3}
+		\caption{Bifurcation pour $\rho < \lambda_2$}
+		\label{bifu_map}
+	\end{center}
+\end{figure}
+
+Il n'y a qu'un groupe pour $\rho \geq \lambda_2$. Pour $\rho < \lambda_2$, on l'apparition
+de quelques groupes, jusqu'à $0,94$ où on a brusquement plus de 20 groupes. La
+bifurcation a bien lieu, mais pour $\rho < \lambda_2$. Pour $\rho \precsim \lambda_2$, les
+vitesses de décroissances de $R\rho^t$ d'une part et de la différence entre les opinions
+d'une autre par sont très proches. Il faut donc un grand nombre d'itérations pour arriver
+à la coupure. On a alors des erreurs numériques. En effet, lorsque la différence de
+valeur entre les différents n\oe uds atteint la précision machine, des erreurs de
+comparaison apparaissent lors du calcul de N', des coupures n'ont pas lieu alors qu'elles
+le devraient.
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=.4\textwidth]{var_rho_ok_2-17.eps}
+		\includegraphics[width=.4\textwidth]{var_rho_nok_2-23.eps}
+		\caption{Évolution de la variance et coupure}
+		\label{num_coupure}
+	\end{center}
+\end{figure}
+
+
+Dans la section suivante, en plus des méthodes << ad hoc >> pour la recherche de communautés,
+nous introduisons un nouveau modèle pour homogénéiser la taille des groupes.
+
 \section{Partitionnement de graphes et détection de communautés}
 Ces résultats montrent que le modèle fournit une méthode de
 partitionnement d'un graphe. On va maintenant la comparer avec des
@@ -278,9 +352,6 @@ discrétisant la solution trouvée $v_2$. Par exemple, on peut vouloir
 chercher le vecteur $x$ de $\{0,1\}^n$ qui maximise le parallélisme
 $(x|v_2)$ avec $v2$, ce qui conduit à mettre les entrées positives de
 $v_2$ dans $E_1$ et les négatives dans $E_2$, ou le contraire.
-
-
-
 
 Modèle normalisé, fonction objectif, partitionnement spectral, (modularité ?)
 
