@@ -240,7 +240,55 @@ et la simulation rapide.
 de communauté (qui peut être complexe) on peut définir un groupe. À l'instant $t$, on
 considère graphe partiel $N'(t) = \bigcup_i N'_i(t)$. Ce graphes présente une ou plusieurs
 composantes connexes, qui représentes les ensembles d'agents communiquant encore entre eux
-}
+(directement ou pas) à l'instant $t$. Ces
+
+\subsection{Résultats numériques} Nous commençons par analyser les résultats qualitatifs
+pour le modèle, avec $\rho$ de l'ordre de $\lambda_2$. On observe des groupes au sein
+desquels l'opinion est globalement homogène. Cette structure de groupe semble être peu
+sensible à la répartition initiale des opinions puisqu'elle apparaît très souvent sur
+plusieurs simulations (voir \fig{res_3cs}).
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=.4\textwidth]{za-m1-3}
+		\includegraphics[width=.4\textwidth]{do-m1-3}
+		\caption{Exemple de groupes apparaissant lors de la simulation}
+		\label{res_3cs}
+	\end{center}
+\end{figure}
+
+Remarque : certains groupes sont relativement petits devant d'autre.
+
+\subparagraph{Influence du forçage}
+
+Maintenant nous nous intéressons à la bifurcation introduite en section \ref{forcage}.
+Pour ceci nous calculons le nombre de groupes quand $\rho$ \emph{diminue}
+(\fig{bifu_map}). $R$ est maintenu fixé, il n'a pas d'influence visible sur les résultats.
+Nous utiliseons le graphe de Zachary, pour lequel $\lambda_2 \approx 0,9471$.
+Le nombre de groupe est calculé en faisant la moyenne sur 10 simulations.
+
+\begin{figure}[htb]
+	\begin{center}
+		%\includegraphics[width=\textwidth]{do-m1-3}
+		\caption{Bifurcation pour $\rho < \lambda_2$}
+		\label{bifu_map}
+	\end{center}
+\end{figure}
+
+Il n'y a qu'un groupe pour $\rho \geq \lambda_2$. Pour $\rho < \lambda_2$, on l'apparition
+de quelques groupes, jusqu'à $0,94$ où on a brusquement plus de 20 groupes. La
+bifurcation a bien lieu, mais pour $\rho < \lambda_2$. Pour $\rho \precsim \lambda_2$, les
+vitesses de décroissances de $R\rho^t$ d'une part et de la différence entre les opinions
+d'une autre par sont très proches. Il faut donc un grand nombre d'itérations pour arriver
+à la coupure. On a alors des erreurs numériques. En effet, lorsque la différence de
+valeur entre les différents n\oe uds atteint la précision machine, des erreurs de
+comparaison apparaissent lors du calcul de N', des coupures n'ont pas lieu alors qu'elles
+le devraient.
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=.4\textwidth]{var_rho_ok_2-17.eps}
+		\includegraphics[width=.4\textwidth]{var_rho_nok_2-23.eps}
 		\caption{Évolution de la variance et coupure}
 		\label{num_coupure}
 	\end{center}
