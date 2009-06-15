@@ -177,29 +177,29 @@ proche du sien, et de se fermer de plus en plus au cours du
 temps. Cela conduit au même modèle que précédemment, mis à part que la
 somme n'est plus prise sur le voisinage de la personne dans le graphe,
 mais dans un sous-ensemble de celui-ci : $$N'_{i} = \{j \in N_i, ||x_i
- - x_j|| < R \rho^t\}.$$
+- x_j|| < R \rho^t\}.$$
 
 $R$ est un paramètre de normalisation, et $\rho$ caractérise la
- vitesse de décroissance. Pour favoriser l'apparition de communautés
- de façon relativement indépendante des conditions initiales, il faut
- que $R$ soit grand. En effet, dans le cas contraire, des communautés
- se forment trop vite en fonction de la position relative des données
- initiales.
+vitesse de décroissance. Pour favoriser l'apparition de communautés
+de façon relativement indépendante des conditions initiales, il faut
+que $R$ soit grand. En effet, dans le cas contraire, des communautés
+se forment trop vite en fonction de la position relative des données
+initiales.
 
- Intuitivement, on s'attend à une bifurcation pour $\rho =
- \lambda_2$. En effet, en supposant $R$ assez grand, le système va
- subir une phase transitoire où les opinions vont s'homogénéiser,
- gommant les conditions initiales, puis converger vers l'équilibre à
- la vitesse ${\lambda_2}^t$. Si $\lambda_2 < \rho$, la coupure
- n'interviendra pas, et le système convegera vers un consensus tout
- comme dans le modèle précédent. Si $\lambda_2 > \rho$ en revanche,
- la convergence n'est pas assez rapide, et il y a coupure au bout
- d'un certain temps : deux communautés s'isolent et fonctionnement
- indépendamment l'une de l'autre. À partir de là, les deux
- communautés convergent vers un consensus à des vitesses
- $\lambda_2^1$ et $\lambda_2^2$ (les connectivités algébriques des
- sous-graphes), et le même raisonnement s'applique pour
- éventuellement encore diviser ces communautés.
+Intuitivement, on s'attend à une bifurcation pour $\rho =
+\lambda_2$. En effet, en supposant $R$ assez grand, le système va
+subir une phase transitoire où les opinions vont s'homogénéiser,
+gommant les conditions initiales, puis converger vers l'équilibre à
+la vitesse ${\lambda_2}^t$. Si $\lambda_2 < \rho$, la coupure
+n'interviendra pas, et le système convergera vers un consensus tout
+comme dans le modèle précédent. Si $\lambda_2 > \rho$ en revanche,
+la convergence n'est pas assez rapide, et il y a coupure au bout
+d'un certain temps : deux communautés s'isolent et fonctionnement
+indépendamment l'une de l'autre. À partir de là, les deux
+communautés convergent vers un consensus à des vitesses
+$\lambda_2^1$ et $\lambda_2^2$ (les connectivités algébriques des
+sous-graphes), et le même raisonnement s'applique pour
+éventuellement encore diviser ces communautés.
 
 \section{Résultats}
 Nous avons implémenté ce modèle en \textsc{MATLAB}, nous présentons ici
@@ -251,8 +251,6 @@ Dans la section suivante, en plus des méthodes << ad hoc >> pour la recherche d
 nous introduisons un nouveau modèle pour homogénéiser la taille des groupes.
 
 \section{Partitionnement de graphes et détection de communautés}
-\label{partitionnement}
-
 Ces résultats montrent que le modèle fournit une méthode de
 partitionnement d'un graphe. On va maintenant la comparer avec des
 méthodes classiques de partitionnement.
@@ -306,9 +304,6 @@ discrétisant la solution trouvée $v_2$. Par exemple, on peut vouloir
 chercher le vecteur $x$ de $\{0,1\}^n$ qui maximise le parallélisme
 $(x|v_2)$ avec $v2$, ce qui conduit à mettre les entrées positives de
 $v_2$ dans $E_1$ et les négatives dans $E_2$, ou le contraire.
-
-
-
 
 Modèle normalisé, fonction objectif, partitionnement spectral, (modularité ?)
 
