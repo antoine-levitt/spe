@@ -86,7 +86,7 @@ la chaleur, dont les propriétés de convergence vers la valeur moyenne
 sont bien connues. En fait, dans le cas d'un graphe représentant un
 espace discrétisé, (\ref{eq_diff}) est tout simplement la
 discrétisation par différences finies de l'équation de la chaleur. On
-va démontrer ces propriétés de convergence.
+va maintenant démontrer ces propriétés de convergence.
 
 \subsection{Propriétés spectrales de $L$}
 $L$ est symétrique donc diagonalisable dans une base orthonormée de
@@ -134,16 +134,17 @@ Plutôt que de simuler ce modèle directement, on va utiliser un modèle
 discrétisé, qui a sensiblement les même propriétés tout en étant plus
 facile à étudier. Ce modèle permet notamment de rajouter des effets
 qui seraient plus délicats à manipuler, comme on le verra section
-\ref{forcage}. L'idée la plus simple est d'utiliser la méthode
-d'Euler sur (\ref{eq_diff}), qui donne :
+\ref{forcage}. L'idée la plus simple est d'utiliser la méthode d'Euler
+sur (\ref{eq_diff}), qui donne la relation de récurrence en l'indice
+discret $t$ :
 \begin{equation}
   \label{eq_discrete}
-  x^{k+1} = x^k - \alpha L x^k,
+  x(t+1) = x(t) - \alpha L x(t),
 \end{equation}
 ou sous forme scalaire :
 \begin{equation}
   \label{eq_discrete_scal}
-  x_i^{k+1} = x_i^k + \alpha \sum_{j \in N_i} (x_j^k - x_i^k).
+  x_i(t) = x_i(t) + \alpha \sum_{j \in N_i} (x_j(t) - x_i(t)).
 \end{equation}
 
 On retrouve l'idée de l'équation précédente : à chaque étape, chaque
@@ -156,6 +157,44 @@ grand pour avoir des simulations rapides.
 
 \subsection{Forcage et formation de communautés}
 \label{forcage}
+Les expériences numériques sur ce modèle donnent bien le résultat
+attendu, c'est-à-dire un consensus, et la vitesse de convergence est
+bien égale à la seconde valeur propre $\lambda_2$. On veut maintenant
+utiliser ces résultats pour obtenir des résultats sur la structure du
+graphe, et notamment l'existence de communautés dans celui-ci. L'idée
+est simple : si on force les gens à se mettre d'accord plus vite
+qu'ils ne se mettraient d'accord naturellement, il ne va pas y avoir
+consensus mais formation de différents groupes de même
+opinion. L'étude de ces groupes peut faire apparaître une structure de
+communauté. Pour mettre en pratique ces idées, on impose à chaque
+personne de ne prendre en considération que des avis raisonnablement
+proche du sien, et de se fermer de plus en plus au cours du
+temps. Cela conduit au même modèle que précédemment, mis à part que la
+somme n'est plus prise sur le voisinage de la personne dans le graphe,
+mais dans un sous-ensemble de celui-ci : $$N'_{i} = \{j \in N_i, ||x_i
+  - x_j|| < R \rho^t\}.$$
+
+$R$ est un paramètre de normalisation, et $\rho$ caractérise la
+  vitesse de décroissance. Pour favoriser l'apparition de communautés
+  de façon relativement indépendante des conditions initiales, il faut
+  que $R$ soit grand. En effet, dans le cas contraire, des communautés
+  se forment trop vite en fonction de la position relative des données
+  initiales.
+
+  Intuitivement, on s'attend à une bifurcation pour $\rho =
+  \lambda_2$. En effet, en supposant $R$ assez grand, le système va
+  subir une phase transitoire où les opinions vont s'homogénéiser,
+  gommant les conditions initiales, puis converger vers l'équilibre à
+  la vitesse ${\lambda_2}^t$. Si $\lambda_2 < \rho$, la coupure
+  n'interviendra pas, et le système convegera vers un consensus tout
+  comme dans le modèle précédent. Si $\lambda_2 > \rho$ en revanche,
+  la convergence n'est pas assez rapide, et il y a coupure au bout
+  d'un certain temps : deux communautés s'isolent et fonctionnement
+  indépendamment l'une de l'autre. À partir de là, les deux
+  communautés convergent vers un consensus à des vitesses
+  $\lambda_2^1$ et $\lambda_2^2$ (les connectivités algébriques des
+  sous-graphes), et le même raisonnement s'applique pour
+  éventuellement encore diviser ces communautés.
 
 \subsection{Résultats}
 \paragraph{Graphes utilisés}
