@@ -63,30 +63,6 @@ propriétés (notamment spectrales) de cette matrice renseignent
 sur le graphe, et c'est cette approche que l'on va utiliser dans
 notre étude.
 
-\subsection{Graphes utilisés}
-On utilise principalement deux graphes, représentés figure
-\ref{graphes}.  Le premier est le réseau d'amitié dans un club de
-karaté d'une université américaine dans les années 70, contenant 34
-membres \cite{zachary}. Le second est le graphe d'interactions d'une
-communauté de 62 dauphins \cite{dolphins}.
-
-\begin{figure}[htb]
-  \centering
-  (a)
-  \includegraphics[width=.4 \textwidth]{zachary}
-  (b)
-  \includegraphics[width=.4 \textwidth]{dolphins}
-  \caption{Club de karaté de Zachary (a), et communauté de dauphins (b).}
-  \label{graphes}
-\end{figure}
-
-Ces graphes ont été choisis parce qu'ils possèdent des
-structures de communauté qu'on peut mettre en évidence plus
-facilement que sur un graphe aléatoire. Sur la communauté de
-dauphins, il a été observé une partition des dauphins au départ
-de l'un d'entre eux, ce qui fournit une base expérimentale à
-notre étude.
-
 \subsection{Modélisation par équation différentielle}
 Étant donné un vecteur d'opinions initiales $x^0$, on
 s'intéresse à l'évolution de ces opinions dans différents
@@ -181,7 +157,35 @@ grand pour avoir des simulations rapides.
 \subsection{Forcage et formation de communautés}
 \label{forcage}
 
+\subsection{Résultats}
+\paragraph{Graphes utilisés}
+On utilise principalement deux graphes, représentés figure
+\ref{graphes}.  Le premier est le réseau d'amitié dans un club de
+karaté d'une université américaine dans les années 70, contenant 34
+membres \cite{zachary}. Le second est le graphe d'interactions d'une
+communauté de 62 dauphins \cite{dolphins}.
+
+\begin{figure}[htb]
+  \centering
+  (a)
+  \includegraphics[width=.4 \textwidth]{zachary}
+  (b)
+  \includegraphics[width=.4 \textwidth]{dolphins}
+  \caption{Club de karaté de Zachary (a), et communauté de dauphins (b).}
+  \label{graphes}
+\end{figure}
+
+Ces graphes ont été choisis parce qu'ils possèdent des
+structures de communauté qu'on peut mettre en évidence plus
+facilement que sur un graphe aléatoire. Sur la communauté de
+dauphins, il a été observé une partition des dauphins au départ
+de l'un d'entre eux, ce qui fournit une base expérimentale à
+notre étude.
+
+\paragraph{Résultats numériques}
+Variance (pb numériques), évolution, clusterisation
 \section{Partitionnement de graphes et détection de communautés}
+Modèle normalisé, fonction objectif, partitionnement spectral, (modularité ?)
 
 \begin{thebibliography}{2}
 \bibitem{zachary} W. W. Zachary, An information flow model for conflict and fission in small groups, Journal of Anthropological Research 33, 452-473 (1977)
