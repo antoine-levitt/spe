@@ -89,6 +89,7 @@ discrétisation par différences finies de l'équation de la chaleur. On
 va maintenant démontrer ces propriétés de convergence.
 
 \subsection{Propriétés spectrales de $L$}
+\label{props_spectrales_L}
 $L$ est symétrique donc diagonalisable dans une base orthonormée de
 vecteurs propres $(v_i)_{i=1\dots n}$ associés à des valeurs propres
 $(\lambda_i)_{i=1 \dots n}$. On décompose $x^0$ sur cette base : $x^0
@@ -107,8 +108,8 @@ tout $x \in \R^n$.
 \begin{eqnarray*}
   x^T L x & = & \sum_{i = 1}^n x_i \sum_{j \in N_i} (x_i - x_j) \\
   & = & \sum_{i = 1}^n d_i x_i^2 - \sum_{i = 1}^n \sum_{j \in N_i} x_i x_j \\
-  & = & \sum_{v \in V} (x_i^2 + x_j^2) + \sum_{v \in V} 2 x_i x_j \\
-  & = & \sum_{v \in V} (x_i - x_j)^2 \\
+  & = & \sum_{\{i, j\} \in V} (x_i^2 + x_j^2) + \sum_{\{i, j\} \in V} 2 x_i x_j \\
+  & = & \sum_{\{i, j\} \in V} (x_i - x_j)^2 \\
   & \geq & 0
 \end{eqnarray*}
 
@@ -224,6 +225,63 @@ notre étude.
 \paragraph{Résultats numériques}
 Variance (pb numériques), évolution, clusterisation
 \section{Partitionnement de graphes et détection de communautés}
+Ces résultats montrent que le modèle fournit une méthode de
+partitionnement d'un graphe. On va maintenant la comparer avec des
+méthodes classiques de partitionnement.
+
+Le problème à résoudre est : étant donné un graphe, comment le
+partitionner de la façon la plus naturelle possible ? Évidemment, il
+faut tout d'abord définir rigoureusement ce qu'on entend par
+``naturelle''. Un critère qui peut être intéressant est le nombre
+d'arêtes entre les deux groupes : on cherche la partition de $E$ en
+deux groupes $E_1$ et $E_2$ qui minimise ce nombre d'arêtes $n_a$.
+
+On note $x_p$ le vecteur caractérisant cette partition : il vaut 1 sur
+$E_1$ et 0 sur $E_2$. Par le calcul mené au \ref{props_spectrales_L},
+on a :
+
+\begin{equation}
+  x^T L x = \sum_{\{i, j\} \in V} (x_i - x_j)^2.  
+\end{equation}
+
+Appliqué à notre vecteur $x$, on obtient
+\begin{equation}
+  x_p^T L x_p = n_a
+\end{equation}
+
+Ainsi notre problème s'écrit : trouver $x \in \{0,1\}^n$ qui
+minimise $x^T L x$. C'est un problème d'optimisation combinatoire
+qui peut être coûteux à résoudre quand $n$ est grand, et une
+énumération triviale mène à une complexité en $\mathcal O (2^n)$. On peut
+cependant en obtenir une approximation par une méthode spectrale. On
+considère le problème analogue en domaine continu : $x$ est
+maintenant pris dans la sphère unité de $R^n$. $L$ est symétrique donc
+diagonalisable en base orthonormée à valeurs propres réelles, et on
+peut écrire :
+
+\begin{equation}
+  x^T L x = \sum_{i=1}^n \lambda_i {x_i}^2,
+\end{equation}
+où $x_i$ est la composante de $x$ sur le vecteur propre $v_i$.
+
+La solution à ce problème de minimisation est simple : mettre tout le
+poids dans la somme sur la plus petite valeur propre, c'est-à-dire, en
+supposant que les valeurs propres sont triées, prendre $x$ parallèle à
+$v_1$. Comme vu précédemment, $\lambda_1 = 0$ et $v_1 = (1, 1, \dots,
+1)^T$, ce qui donne une solution triviale du problème. Cette solution
+consiste à mettre tous les noeuds dans $E_1$ : $n_a = 0$, mais ce
+n'est pas très intéressant. On fixe donc la composante sur $v_1$ à 0,
+et la solution est maintenant de prendre $x$ parallèle à $v_2$.
+
+Il faut maintenant remonter au problème original discret, en
+discrétisant la solution trouvée $v_2$. Par exemple, on peut vouloir
+chercher le vecteur $x$ de $\{0,1\}^n$ qui maximise le parallélisme
+$(x|v_2)$ avec $v2$, ce qui conduit à mettre les entrées positives de
+$v_2$ dans $E_1$ et les négatives dans $E_2$, ou le contraire.
+
+
+
+
 Modèle normalisé, fonction objectif, partitionnement spectral, (modularité ?)
 
 \begin{thebibliography}{2}
