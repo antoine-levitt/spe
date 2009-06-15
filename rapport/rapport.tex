@@ -147,13 +147,41 @@ donc trivial : il converge vers $(\alpha_1, \alpha_1, \dots,
 \alpha_1)^T$ qui n'est autre que la valeur moyenne de $x^0$. La
 vitesse de convergence est dictée par la deuxième valeur propre
 $\lambda_2$ : $||x(t) - x_\infty|| \approx e^{-\lambda_2 t}$. Cette
-valeur propre est appellée connectivité algébrique, et mesure à quel
-point un graphe est connecté. Notons aussi que $x(t) - x_\infty$
-s'aligne sur le second vecteur propre $v_2$.
+valeur propre est appellée {\bf connectivité algébrique}, et mesure à
+quel point un graphe est connecté. Notons aussi que $x(t) - x_\infty$
+s'aligne sur le second vecteur propre $v_2$ : $x(t) - x_\infty \approx
+\alpha_2 e^{-\lambda_2 t} v_2$. Cette remarque nous sera utile par la
+suite.
 
 \subsection{Modèle discret}
+Plutôt que de simuler ce modèle directement, on va utiliser un modèle
+discrétisé, qui a sensiblement les même propriétés tout en étant plus
+facile à étudier. Ce modèle permet notamment de rajouter des effets
+qui seraient plus délicats à manipuler, comme on le verra section
+\ref{forcage}. L'idée la plus simple est d'utiliser la méthode
+d'Euler sur (\ref{eq_diff}), qui donne :
+\begin{equation}
+  \label{eq_discrete}
+  x^{k+1} = x^k - \alpha L x^k,
+\end{equation}
+ou sous forme scalaire :
+\begin{equation}
+  \label{eq_discrete_scal}
+  x_i^{k+1} = x_i^k + \alpha \sum_{j \in N_i} (x_j^k - x_i^k).
+\end{equation}
 
-\section{Analyse spectrale de graphes et partitionnement}
+On retrouve l'idée de l'équation précédente : à chaque étape, chaque
+individu modifie son opinion en fonction de celle de ses voisins. Le
+paramètre $\alpha$ représente l'amplitude des changements par pas de
+temps. Le modèle précédent est retrouvé dans la limite où $\alpha$
+tend vers 0. Dans nos simulations, on prend $\alpha$ suffisamment
+petit pour ne pas introduire d'oscillations parasites, et suffisamment
+grand pour avoir des simulations rapides.
+
+\subsection{Forcage et formation de communautés}
+\label{forcage}
+
+\section{Partitionnement de graphes et détection de communautés}
 
 \begin{thebibliography}{2}
 \bibitem{zachary} W. W. Zachary, An information flow model for conflict and fission in small groups, Journal of Anthropological Research 33, 452-473 (1977)
