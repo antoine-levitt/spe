@@ -38,11 +38,11 @@ arêtes non orienté : les éléments de $V$ sont des ensembles à deux
 par des relations spécifiques au domaine d'intérêt. Par exemple, on
 peut prendre pour $E$ les individus d'un réseau social en ligne (type
 Facebook, Myspace ...), et pour $V$ leurs relations d'amitié : $\{i,
-j\} \in V$ si et seulement si les individus $i$ et $j$ sont amis. À chaque individu
-$i$ on associe une valeur réelle $x_i$ représentant son opinion :
-l'état des opinions est donc représenté par un vecteur $x \in
-\R^n$. On peut très facilement étendre ce modèle avec des opinions à valeurs
-dans $\R^d$.
+j\} \in V$ si et seulement si les individus $i$ et $j$ sont amis. À
+chaque individu $i$ on associe une valeur réelle \footnote{Il est facile
+de généraliser au cas multidimensionnel, mais on se restreindra à la
+dimension 1 ici.}$x_i$ représentant son opinion : l'état des opinions est
+donc représenté par un vecteur $x \in \R^n$.
 
 Tout d'abord, quelques rappels de théorie des graphes. On note $d_i$
 le degré du n\oe ud $i$, égal au nombre d'arêtes incidentes au n\oe ud
@@ -68,7 +68,7 @@ sur le graphe, et c'est cette approche que l'on va utiliser dans
 notre étude.
 
 \subsection{Modélisation par équation différentielle}
-Étant donné un vecteur d'opinions initiales $x^0$, on
+Étant donné un vecteur d'opinions initiales $x(0)$, on
 s'intéresse à l'évolution de ces opinions dans différents
 modèles. Le modèle de base est l'équation différentielle
 \begin{equation}
@@ -76,7 +76,7 @@ modèles. Le modèle de base est l'équation différentielle
  \dot x + L x = 0.
 \end{equation}
 
-On peut interpréter cette équation en la réécrivant sous forme scalaire :
+On peut interpréter cette équation en la réécrivant composante par composante :
 \begin{equation}
  \label{eq_diff_scal}
  \dot {x}_i = \sum_{j \in N_i} (x_j - x_i),
@@ -296,11 +296,14 @@ sur la plupart des simulations.
 
 \subsection{Influence du forçage}
 Figure et interprétation à changer
-Maintenant nous nous intéressons à la bifurcation introduite en section \ref{forçage}.
-Pour ceci nous calculons le nombre de groupes quand $\rho$ \emph{diminue}
-(\fig{bifu_map}). $R$ est maintenu fixé, il n'a pas d'influence visible sur les résultats.
-Nous utiliseons le graphe de Zachary, pour lequel $\lambda_2 \approx 0,953$.
-Le nombre de groupe est calculé en faisant la moyenne sur 10 simulations.
+
+Maintenant nous nous intéressons à la bifurcation introduite en
+section \ref{forçage}.  Pour ceci nous calculons le nombre de groupes
+pour différentes valeurs de $\rho$ \fig{bifu_map}. $R$ est maintenu
+suffisamment grand pour ne pas influer sur les résultats.  Nous
+utiliseons le graphe de Zachary, pour lequel $\lambda_2 \approx
+0,953$.  Le nombre de groupe est calculé en faisant la moyenne sur 10
+simulations.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -339,6 +342,7 @@ Ces résultats montrent que le modèle fournit une méthode de
 partitionnement d'un graphe. On va maintenant la comparer avec des
 méthodes classiques de partitionnement.
 
+\subsection{Partitionnement spectral}
 Le problème à résoudre est : étant donné un graphe, comment le
 partitionner de la façon la plus naturelle possible ? Évidemment, il
 faut tout d'abord définir ce qu'on entend par <<~naturelle~>>. Un
@@ -386,8 +390,11 @@ et la solution est maintenant de prendre $x$ parallèle à $v_2$.
 Il faut maintenant remonter au problème original discret, en
 discrétisant la solution trouvée $v_2$. Par exemple, on peut vouloir
 chercher le vecteur $x$ de $\{0,1\}^n$ qui maximise le parallélisme
-$(x|v_2)$ avec $v2$, ce qui conduit à mettre les entrées positives de
-$v_2$ dans $E_1$ et les négatives dans $E_2$, ou le contraire.
+$(x|v_2)$ avec $v_2$, ce qui conduit à mettre les entrées positives de
+$v_2$ dans $E_1$ et les négatives dans $E_2$, ou le contraire. On peut
+également clusteriser $v_2$ pour isoler deux groupes, ce qui conduit à
+couper $v_2$ au point où la différence $v_2(i) - v_2(i-1)$ est la plus
+grande.
 
 Cette solution donne de bons résultats approchés pour le problème de
 minimisation. Un avantage est qu'il existe des algorithmes efficaces
@@ -396,6 +403,9 @@ puissances). Typiquement, pour un graphe non pathologique (nombre
 d'arêtes de l'ordre du nombre de n\oe uds), l'algorithme de
 partitionnement est en $\mathcal O(n^2)$.
 
+\subsection{Liens avec notre modèle}
+
+\subsection{Laplacienne normalisée}
 L'inconvénient de cette méthode est qu'elle cherche uniquement à
 minimiser le nombre d'arcs entre les groupes. Elle risque donc
 d'isoler de très petits groupements. Pour pallier à ce défaut, on
