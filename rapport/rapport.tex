@@ -7,10 +7,11 @@
 \usepackage{graphicx}
 \usepackage[small]{caption}
 \usepackage{amsmath, amssymb}
+\usepackage{fullpage}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 
-\def\fig#1{Fig.~\ref{#1}}
+\def\fig#1{\textsc{Figure}~\ref{#1}}
 \def\eq#1{(\ref{#1})}
 
 \newtheorem{theorem}{Théorème}
@@ -232,7 +233,7 @@ Les opinions initiales sont tirés selon une loi uniforme sur $[0; 1]$.
 $R$ est choisi relativement grand devant la taille de la distribution initiale
 ($R\approx10$) pour éviter l'influence lors de la phase transitoire. Enfin, $\alpha$
 est choisi de manière à avoir une simulation stable (voir section \ref{mod_discret}).
-En pratique, on a $\alpha = 0,08$ pour le graphe Zachary et $\alpha = 0,4$ pour les
+En pratique, on a $\alpha = 0,1$ pour le graphe Zachary et $\alpha = 0,4$ pour les
 dauphins. On effectue $\approx 400$ itérations, les résultats sont alors peu variants,
 et la simulation rapide.
 
@@ -242,7 +243,8 @@ considère graphe partiel $N'(t) = \bigcup_i N'_i(t)$. Ce graphes présente une 
 composantes connexes, qui représentes les ensembles d'agents communiquant encore entre eux
 (directement ou pas) à l'instant $t$. Ces
 
-\subsection{Résultats numériques} Nous commençons par analyser les résultats qualitatifs
+\subsection{Résultats numériques}
+Nous commençons par analyser les résultats qualitatifs
 pour le modèle, avec $\rho$ de l'ordre de $\lambda_2$. On observe des groupes au sein
 desquels l'opinion est globalement homogène. Cette structure de groupe semble être peu
 sensible à la répartition initiale des opinions puisqu'elle apparaît très souvent sur
@@ -259,41 +261,60 @@ plusieurs simulations (voir \fig{res_3cs}).
 
 Remarque : certains groupes sont relativement petits devant d'autre.
 
-\subparagraph{Influence du forçage}
+\paragraph{Évolution}
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=.4\textwidth]{evolution_ok}
+		\includegraphics[width=.4\textwidth]{evolution_clusters}
+	\end{center}
+	\caption{Courbes d'évolution des opinions}
+	\label{fig:evol}
+\end{figure}
+
+Nous voyons ici apparaître 2 phases (\fig{fig:evol}):
+\begin{itemize}
+	\item Une phase transitoire, où les opinions se rapprochent rapidement d'un <<~consensus~>>.
+		Dans le cas de plusieurs groupes, plusieurs consensus se distinguent.
+	\item Une phase de régime permanent : une fois les consensus atteints, aucune évolution n'est visible.
+\end{itemize}
+
+\paragraph{Influence du forçage}
 
 Maintenant nous nous intéressons à la bifurcation introduite en section \ref{forcage}.
 Pour ceci nous calculons le nombre de groupes quand $\rho$ \emph{diminue}
 (\fig{bifu_map}). $R$ est maintenu fixé, il n'a pas d'influence visible sur les résultats.
-Nous utiliseons le graphe de Zachary, pour lequel $\lambda_2 \approx 0,9471$.
+Nous utiliseons le graphe de Zachary, pour lequel $\lambda_2 \approx 0,953$.
 Le nombre de groupe est calculé en faisant la moyenne sur 10 simulations.
 
 \begin{figure}[htb]
 	\begin{center}
-		%\includegraphics[width=\textwidth]{do-m1-3}
+		\includegraphics[width=0.5\textwidth]{bifur}
 		\caption{Bifurcation pour $\rho < \lambda_2$}
 		\label{bifu_map}
 	\end{center}
 \end{figure}
 
-Il n'y a qu'un groupe pour $\rho \geq \lambda_2$. Pour $\rho < \lambda_2$, on l'apparition
-de quelques groupes, jusqu'à $0,94$ où on a brusquement plus de 20 groupes. La
-bifurcation a bien lieu, mais pour $\rho < \lambda_2$. Pour $\rho \precsim \lambda_2$, les
-vitesses de décroissances de $R\rho^t$ d'une part et de la différence entre les opinions
-d'une autre par sont très proches. Il faut donc un grand nombre d'itérations pour arriver
-à la coupure. On a alors des erreurs numériques. En effet, lorsque la différence de
-valeur entre les différents n\oe uds atteint la précision machine, des erreurs de
-comparaison apparaissent lors du calcul de N', des coupures n'ont pas lieu alors qu'elles
-le devraient.
+Il n'y a qu'un groupe pour $\rho \geq \lambda_2$. Pour $\rho < \lambda_2$, on l'apparition de quelques groupes, jusqu'à $0,94$ où
+on a brusquement plus de 20 groupes. La bifurcation a bien lieu, mais pour $\rho < \lambda_2$. Pour $\rho \leq \lambda_2$, les
+vitesses de décroissances de $R\rho^t$ d'une part et de la différence entre les opinions d'une autre par sont très proches. Il
+faut donc un grand nombre d'itérations pour arriver à la coupure. En s'arrêtant à 400 itérations, celle-ci n'apparaît donc pas.
+Si on augmente le nombre d'itérations, des erreurs numériques apparaîssent comme on peut le voir \fig{num_coupure}.
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=.4\textwidth]{var_rho_ok_2-17}
-		\includegraphics[width=.4\textwidth]{var_rho_nok_2-23}
-		\caption{Évolution de la variance et coupure}
+		\includegraphics[width=.4\textwidth]{var_rho_0938}
+		\includegraphics[width=.4\textwidth]{var_rho_097}
+		\includegraphics[width=.5\textwidth]{var_rho_0948}
+		\caption{Évolution de l'écart type des opinions pour différentes valeurs de $\rho$}
 		\label{num_coupure}
 	\end{center}
 \end{figure}
 
+Dans les 2 premiers cas, $\rho$ est assez éloigné de $\lambda_2$, on a bien coupure si $\rho < \lambda_2$.
+Dans le troisième cas, on a pris $\rho \leq \lambda_2$, il y a théoriquement coupure, mais seulement après un grand nombre
+d'itérations. L'écart type est alors de l'ordre de la précision machine et on a des erreurs lors de la construction du graphe
+de voisinage $N'$.
 
 Dans la section suivante, en plus des méthodes << ad hoc >> pour la recherche de communautés,
 nous introduisons un nouveau modèle pour homogénéiser la taille des groupes.
@@ -315,7 +336,7 @@ $E_1$ et 0 sur $E_2$. Par le calcul mené au \ref{props_spectrales_L},
 on a :
 
 \begin{equation}
-  x^T L x = \sum_{\{i, j\} \in V} (x_i - x_j)^2.  
+  x^T L x = \sum_{\{i, j\} \in V} (x_i - x_j)^2.
 \end{equation}
 
 Appliqué à notre vecteur $x$, on obtient
@@ -365,6 +386,7 @@ minimiser le nombre d'arcs entre les groupes. Elle risque donc
 d'isoler de très petits groupements. Pour pallier à ce défaut, on
 utilise donc BLABLA renormalisé.
 
+\clearpage
 \begin{thebibliography}{2}
 \bibitem{zachary} W. W. Zachary, An information flow model for conflict and fission in small groups, Journal of Anthropological Research 33, 452-473 (1977)
 \bibitem{dolphins} D. Lusseau, K. Schneider, O. J. Boisseau, P. Haase, E. Slooten, and S. M. Dawson, Behavioral Ecology and Sociobiology 54, 396-405 (2003)
