@@ -106,15 +106,15 @@ La somme des lignes de $L$ est égale à $0$ (par définition du degré),
 c'est-à-dire que $(1, 1, \dots, 1)^T$ est vecteur propre pour la valeur
 $0$. On va montrer que $L$ est positive, c'est-à-dire que toutes ses
 valeurs propres sont positives. Pour cela, on utilise la
-caractérisation : une matrice est positive ssi $x^T L x \geq 0$ pour
+caractérisation : une matrice est positive si et seulement si $x^T L x \geq 0$ pour
 tout $x \in \R^n$.
 
 \begin{eqnarray*}
-  x^T L x & = & \sum_{i = 1}^n x_i \sum_{j \in N_i} (x_i - x_j) \\
-  & = & \sum_{i = 1}^n d_i x_i^2 - \sum_{i = 1}^n \sum_{j \in N_i} x_i x_j \\
-  & = & \sum_{\{i, j\} \in V} (x_i^2 + x_j^2) + \sum_{\{i, j\} \in V} 2 x_i x_j \\
-  & = & \sum_{\{i, j\} \in V} (x_i - x_j)^2 \\
-  & \geq & 0
+ x^T L x & = & \sum_{i = 1}^n x_i \sum_{j \in N_i} (x_i - x_j) \\
+ & = & \sum_{i = 1}^n d_i x_i^2 - \sum_{i = 1}^n \sum_{j \in N_i} x_i x_j \\
+ & = & \sum_{\{i, j\} \in V} (x_i^2 + x_j^2) + \sum_{\{i, j\} \in V} 2 x_i x_j \\
+ & = & \sum_{\{i, j\} \in V} (x_i - x_j)^2 \\
+ & \geq & 0
 \end{eqnarray*}
 
 $L$ est donc positive. On voit également qu'un vecteur propre associé
@@ -122,7 +122,7 @@ $L$ est donc positive. On voit également qu'un vecteur propre associé
 composante connexe. La multiplicité de $0$ comme valeur propre est
 donc égale au nombre de composantes connexes dans le graphe. On ne
 considère ici que des graphes connexes, donc on peut ranger les
-valeurs propres : $\lambda_1 = 0 < \lambda_2 \leq \lambda_3 \leq \dots
+valeurs propres : $0 = \lambda_1 < \lambda_2 \leq \lambda_3 \leq \dots
 \leq \lambda_n$. Le comportement en l'infini de (\ref{eq_diff}) est
 donc trivial : il converge vers $(\alpha_1, \alpha_1, \dots,
 \alpha_1)^T$ qui n'est autre que la valeur moyenne de $x^0$. La
@@ -162,7 +162,7 @@ petit pour ne pas introduire d'oscillations parasites, et suffisamment
 grand pour avoir des simulations rapides.
 
 \subsection{Forçage et formation de communautés}
-\label{forçage}
+\label{forcage}
 Les expériences numériques sur ce modèle donnent bien le résultat
 attendu, c'est-à-dire un consensus, et la vitesse de convergence est
 bien égale à la seconde valeur propre $\lambda_2$. On veut maintenant
@@ -175,32 +175,30 @@ opinion. L'étude de ces groupes peut faire apparaître une structure de
 communauté. Pour mettre en pratique ces idées, on impose à chaque
 personne de ne prendre en considération que des avis raisonnablement
 proche du sien, et de se fermer de plus en plus au cours du
-temps. Cela conduit au même modèle que précédemment, mis à part que la
+temps. Cela conduit au même modèle que précédemment, hormis le fait que la
 somme n'est plus prise sur le voisinage de la personne dans le graphe,
 mais dans un sous-ensemble de celui-ci : $$N'_{i} = \{j \in N_i, ||x_i
 - x_j|| < R \rho^t\}.$$
 
-$R$ est un paramètre de normalisation, et $\rho$ caractérise la
-vitesse de décroissance. Pour favoriser l'apparition de communautés
-de façon relativement indépendante des conditions initiales, il faut
-que $R$ soit grand. En effet, dans le cas contraire, des communautés
-se forment trop vite en fonction de la position relative des données
-initiales.
+$R$ est un paramètre de normalisation, et $\rho$ caractérise la vitesse de
+décroissance. Ce dernier paramètre est central dans notre étude. Pour
+favoriser l'apparition de communautés de façon relativement indépendante des
+conditions initiales, il faut que $R$ soit grand. En effet, dans le cas
+contraire, des communautés se forment trop vite en fonction de la position
+relative des données initiales.
 
-Intuitivement, on s'attend à une bifurcation pour $\rho =
-\lambda_2$. En effet, en supposant $R$ assez grand, le système va
-subir une phase transitoire où les opinions vont s'homogénéiser,
-gommant les conditions initiales, puis converger vers l'équilibre à
-la vitesse ${\lambda_2}^t$. Si $\lambda_2 < \rho$, la coupure
-n'interviendra pas, et le système convergera vers un consensus tout
-comme dans le modèle précédent. Si $\lambda_2 > \rho$ en revanche,
-la convergence n'est pas assez rapide, et il y a coupure au bout
+Intuitivement, on s'attend à une bifurcation pour $\rho = \lambda_2$. En
+effet, en supposant $R$ assez grand, le système va subir une phase transitoire
+où les opinions vont s'homogénéiser, gommant la variabilités des conditions
+initiales, puis converger vers l'équilibre à la vitesse ${\lambda_2}^t$. Si
+$\lambda_2 < \rho$, la coupure n'interviendra pas, et le système convergera
+vers un consensus tout comme dans le modèle précédent. Si $\lambda_2 > \rho$
+en revanche, la convergence n'est pas assez rapide, et il y a coupure au bout
 d'un certain temps : deux communautés s'isolent et fonctionnement
-indépendamment l'une de l'autre. À partir de là, les deux
-communautés convergent vers un consensus à des vitesses
-$\lambda_2^1$ et $\lambda_2^2$ (les connectivités algébriques des
-sous-graphes), et le même raisonnement s'applique pour
-éventuellement encore diviser ces communautés.
+indépendamment l'une de l'autre. À partir de là, les deux communautés
+convergent vers un consensus à des vitesses $\lambda_2^1$ et $\lambda_2^2$
+(les connectivités algébriques des sous-graphes), et le même raisonnement
+s'applique pour éventuellement diviser ces communautés davantage.
 
 \section{Résultats}
 Nous avons implémenté ce modèle en \textsc{MATLAB}, nous présentons ici
@@ -287,8 +285,8 @@ sur la plupart des simulations.
 		\includegraphics[width=.4\textwidth]{za-m1-3}
 		\includegraphics[width=.4\textwidth]{do-m1-3}
 		\caption{Exemple de groupes apparaissant lors de la
-                  simulation. Les couleurs correspondent à l'opinion,
-                  et les liens détruits apparaissent en pointillés.}
+ simulation. Les couleurs correspondent à l'opinion,
+ et les liens détruits apparaissent en pointillés.}
 		\label{res_3cs}
 	\end{center}
 \end{figure}
@@ -327,13 +325,13 @@ Si on augmente le nombre d'itérations, des erreurs numériques apparaîssent co
 		\includegraphics[width=.4\textwidth]{var_rho_097}
 		\includegraphics[width=.5\textwidth]{var_rho_0948}
 		\caption{Évolution de l'écart type des opinions pour
-                  $\rho = 0,938$, $0,97$ et $0,948$.}
+ $\rho = 0,938$, $0,97$ et $0,948$.}
 		\label{num_coupure}
 	\end{center}
 \end{figure}
 
 Dans les 2 premiers cas, $\rho$ est assez éloigné de $\lambda_2$, on a
-bien coupure si $\rho < \lambda_2$.  Dans le troisième cas, on a $\rho
+bien coupure si $\rho < \lambda_2$. Dans le troisième cas, on a $\rho
 \leq \lambda_2$. Il y a théoriquement coupure, mais seulement après un
 grand nombre d'itérations. L'écart type est alors de l'ordre de la
 précision machine et les erreurs numériques nous empêchent d'avoir des
@@ -356,12 +354,12 @@ $E_1$ et 0 sur $E_2$. Par le calcul mené au \ref{props_spectrales_L},
 on a :
 
 \begin{equation}
-  x^T L x = \sum_{\{i, j\} \in V} (x_i - x_j)^2.
+ x^T L x = \sum_{\{i, j\} \in V} (x_i - x_j)^2.
 \end{equation}
 
 Appliqué à notre vecteur $x$, on obtient
 \begin{equation}
-  x_p^T L x_p = n_a
+ x_p^T L x_p = n_a
 \end{equation}
 
 Ainsi notre problème s'écrit : trouver $x \in \{0,1\}^n$ qui
@@ -375,7 +373,7 @@ diagonalisable en base orthonormée à valeurs propres réelles, et on
 peut écrire :
 
 \begin{equation}
-  x^T L x = \sum_{i=1}^n \lambda_i {x_i}^2,
+ x^T L x = \sum_{i=1}^n \lambda_i {x_i}^2,
 \end{equation}
 où $x_i$ est la composante de $x$ sur le vecteur propre $v_i$.
 
