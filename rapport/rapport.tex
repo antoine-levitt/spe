@@ -38,11 +38,11 @@ arêtes non orienté : les éléments de $V$ sont des ensembles à deux
 par des relations spécifiques au domaine d'intérêt. Par exemple, on
 peut prendre pour $E$ les individus d'un réseau social en ligne (type
 Facebook, Myspace ...), et pour $V$ leurs relations d'amitié : $\{i,
-j\} \in V$ si et seulement si les individus $i$ et $j$ sont amis. À chaque individu
-$i$ on associe une valeur réelle $x_i$ représentant son opinion :
-l'état des opinions est donc représenté par un vecteur $x \in
-\R^n$. On peut très facilement étendre ce modèle avec des opinions à valeurs
-dans $\R^d$.
+j\} \in V$ si et seulement si les individus $i$ et $j$ sont amis. À
+chaque individu $i$ on associe une valeur réelle \footnote{Il est facile
+de généraliser au cas multidimensionnel, mais on se restreindra à la
+dimension 1 ici.}$x_i$ représentant son opinion : l'état des opinions est
+donc représenté par un vecteur $x \in \R^n$.
 
 Tout d'abord, quelques rappels de théorie des graphes. On note $d_i$
 le degré du n\oe ud $i$, égal au nombre d'arêtes incidentes au n\oe ud
@@ -68,7 +68,7 @@ sur le graphe, et c'est cette approche que l'on va utiliser dans
 notre étude.
 
 \subsection{Modélisation par équation différentielle}
-Étant donné un vecteur d'opinions initiales $x^0$, on
+Étant donné un vecteur d'opinions initiales $x(0)$, on
 s'intéresse à l'évolution de ces opinions dans différents
 modèles. Le modèle de base est l'équation différentielle
 \begin{equation}
@@ -76,7 +76,7 @@ modèles. Le modèle de base est l'équation différentielle
  \dot x + L x = 0.
 \end{equation}
 
-On peut interpréter cette équation en la réécrivant sous forme scalaire :
+On peut interpréter cette équation en la réécrivant composante par composante :
 \begin{equation}
  \label{eq_diff_scal}
  \dot {x}_i = \sum_{j \in N_i} (x_j - x_i),
