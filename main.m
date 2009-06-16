@@ -4,14 +4,14 @@ addpath 'plot';
 % paramètres
 global PARAMS
 PARAMS.gstyle = 2;
-PARAMS.rho = .978;
-PARAMS.alpha = .45;
-PARAMS.method = 2;
+PARAMS.rho = .97;
+PARAMS.alpha = .1;
+PARAMS.method = 1;
 PARAMS.d = 1;
-PARAMS.r = 5;
-PARAMS.iterations = 200;
+PARAMS.r = 10;
+PARAMS.iterations = 1000;
 PARAMS.distrib = 'uni';
-PARAMS.graph = 'dolph';
+PARAMS.graph = 'zachari';
 PARAMS.laplace = 0;
 PARAMS.max_gap = 0;
 
@@ -50,7 +50,7 @@ Xs=[];
 clusters(A, Xs, U);
 
 % évolution temporelle
-evolution(A, Xs, i, B);
+%evolution(A, Xs, i, B);
 
 % analyse des variances
-%variances(A, Xs);
+variances(A, Xs);
