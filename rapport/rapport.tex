@@ -106,7 +106,7 @@ La somme des lignes de $L$ est égale à $0$ (par définition du degré),
 c'est-à-dire que $(1, 1, \dots, 1)^T$ est vecteur propre pour la valeur
 $0$. On va montrer que $L$ est positive, c'est-à-dire que toutes ses
 valeurs propres sont positives. Pour cela, on utilise la
-caractérisation : une matrice est positive ssi $x^T L x \geq 0$ pour
+caractérisation : une matrice est positive si et seulement si $x^T L x \geq 0$ pour
 tout $x \in \R^n$.
 
 \begin{eqnarray*}
@@ -122,7 +122,7 @@ $L$ est donc positive. On voit également qu'un vecteur propre associé
 composante connexe. La multiplicité de $0$ comme valeur propre est
 donc égale au nombre de composantes connexes dans le graphe. On ne
 considère ici que des graphes connexes, donc on peut ranger les
-valeurs propres : $\lambda_1 = 0 < \lambda_2 \leq \lambda_3 \leq \dots
+valeurs propres : $0 = \lambda_1 < \lambda_2 \leq \lambda_3 \leq \dots
 \leq \lambda_n$. Le comportement en l'infini de (\ref{eq_diff}) est
 donc trivial : il converge vers $(\alpha_1, \alpha_1, \dots,
 \alpha_1)^T$ qui n'est autre que la valeur moyenne de $x^0$. La
@@ -161,7 +161,7 @@ tend vers 0. Dans nos simulations, on prend $\alpha$ suffisamment
 petit pour ne pas introduire d'oscillations parasites, et suffisamment
 grand pour avoir des simulations rapides.
 
-\subsection{Forcage et formation de communautés}
+\subsection{Forçage et formation de communautés}
 \label{forcage}
 Les expériences numériques sur ce modèle donnent bien le résultat
 attendu, c'est-à-dire un consensus, et la vitesse de convergence est
