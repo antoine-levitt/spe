@@ -25,7 +25,6 @@
 \tableofcontents
 \newpage
 
-
 \section{Introduction}
 Blabla
 
@@ -228,9 +227,13 @@ d'interactions d'une communauté de 62 dauphins \cite{dolphins}.
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=.4 \textwidth]{zachary}
-		\includegraphics[width=0.4\textwidth]{dolphins}\\
-		\hfill (a) \hfill (b) \hfill~\\
+		\begin{tabular}[h]{cc}
+			\includegraphics[width=.4\textwidth]{zachary} &
+			\includegraphics[width=.4\textwidth]{dolphins}
+			\vspace{-5mm}
+			\\
+			(a) & (b)
+		\end{tabular}
 	\end{center}
 	\caption{Club de karaté (a), et dauphins (b).}
 	\label{exemples_graphes}
@@ -434,6 +437,39 @@ d'isoler de très petits groupements. Pour pallier à ce défaut, on
 utilise donc BLABLA renormalisé.
 
 \subsection{Résultats}
+Dans cette dernière section, on compare la méthode <<~normalisée~>> à la
+méthode spectrale.
+
+\begin{figure}[bth]
+	\begin{center}
+		\begin{tabular}[h]{ccc}
+		\includegraphics[width=0.30\textwidth]{za-m1-2}&
+		\includegraphics[width=0.30\textwidth]{za-m2-2}&
+		\includegraphics[width=0.30\textwidth]{za-m2-2-sp}
+		\vspace{-5mm}
+		\\
+		(a) & (b) & (c)
+		\end{tabular}
+	\end{center}
+	\caption{Partitions obtenues sur le graphe Zachary pour 2 groupes, en fonction de la méthode utilisée. Premier modèle (a), modèle
+	normalisé (b) et analyse spectrale de la Laplacienne (c).}
+	\label{fig:partitions}
+\end{figure}
+\begin{figure}[bth]
+	\begin{center}
+		\begin{tabular}[h]{ccc}
+		\includegraphics[width=0.30\textwidth]{do-m2-2}&
+		\includegraphics[width=0.30\textwidth]{do-m2-2}&
+		\includegraphics[width=0.30\textwidth]{do-m1-2-sp}
+		\vspace{-5mm}
+		\\
+		(a) & (b) & (c)
+		\end{tabular}
+	\end{center}
+	\caption{Partitions obtenues sur le graphe <<~dauphins~>> pour 2 groupes, en fonction de la méthode utilisée. Mêmes notations que
+	ci-dessus.}
+	\label{fig:partitions}
+\end{figure}
 
 \section{Conclusion}
 bonsoir
