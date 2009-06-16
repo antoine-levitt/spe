@@ -388,9 +388,9 @@ discrétisant la solution trouvée $v_2$. Par exemple, on peut vouloir
 chercher le vecteur $x$ de $\{0,1\}^n$ qui maximise le parallélisme
 $(x|v_2)$ avec $v_2$, ce qui conduit à mettre les entrées positives de
 $v_2$ dans $V_1$ et les négatives dans $V_2$, ou le contraire. On peut
-également clusteriser $v_2$ pour isoler deux groupes, ce qui conduit à
-couper $v_2$ au point où la différence $v_2(i) - v_2(i-1)$ est la plus
-grande.
+également grouper les composantes de $v_2$ pour isoler deux parties,
+ce qui conduit à couper $v_2$ au point où la différence $v_2(i) - v_2(i-1)$
+est la plus grande.
 
 Cette solution donne de bons résultats approchés pour le problème de
 minimisation. Un avantage est qu'il existe des algorithmes efficaces
@@ -406,6 +406,11 @@ L'inconvénient de cette méthode est qu'elle cherche uniquement à
 minimiser le nombre d'arcs entre les groupes. Elle risque donc
 d'isoler de très petits groupements. Pour pallier à ce défaut, on
 utilise donc BLABLA renormalisé.
+
+\subsection{Résultats}
+
+\section{Conclusion}
+bonsoir
 
 \clearpage
 \begin{thebibliography}{2}
