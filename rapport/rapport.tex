@@ -234,38 +234,30 @@ nos résultats à la réalité, des communautés ayant été mises en
 
 \subsection{Choix des paramètres}
 Les opinions initiales sont tirés selon une loi uniforme sur $[0; 1]$.
-$R$ est choisi relativement grand devant la taille de la distribution initiale
-($R\approx10$) pour éviter l'influence lors de la phase transitoire. Enfin, $\alpha$
-est choisi de manière à avoir une simulation stable (voir section \ref{mod_discret}).
-En pratique, on a $\alpha = 0,1$ pour le graphe Zachary et $\alpha = 0,4$ pour les
-dauphins. On effectue $\approx 400$ itérations, les résultats sont alors peu variants,
-et la simulation rapide.
+$R$ est choisi relativement grand devant la taille de la distribution
+initiale ($R\approx10$) pour éviter l'influence lors de la phase
+transitoire, comme expliqué section \ref{forcage}. Enfin, $\alpha$ est
+choisi de manière à avoir une simulation stable (voir section
+\ref{mod_discret}) : en pratique, on prend $\alpha = 0,1$ pour le
+graphe Zachary et $\alpha = 0,4$ pour les dauphins. On effectue $400$
+itérations, ce qui produit des résultats peu sensibles aux conditions
+initiales, et des simulations rapides.
 
-\subsection{Détection des groupes} Sans s'attacher à une définition formelle de la notion
-de communauté (qui peut être complexe) on peut définir un groupe. À l'instant $t$, on
-considère graphe partiel $N'(t) = \bigcup_i N'_i(t)$. Ce graphes présente une ou plusieurs
-composantes connexes, qui représentes les ensembles d'agents communiquant encore entre eux
-(directement ou pas) à l'instant $t$. Ces
+\subsection{Détection des groupes}
+Sans s'attacher à une définition formelle de la notion de communauté
+(qui peut être complexe) on peut définir expérimentalement un
+groupe. À l'instant $t$, on considère le graphe partiel $N'(t) =
+\bigcup_i N'_i(t)$, c'est-à-dire la restriction du graphe original aux
+agents qui communiquent encore. Ce graphe présente une ou plusieurs
+composantes connexes, qui correspondent à autant de communautés
+d'opinion.
 
 \subsection{Résultats numériques}
-Nous commençons par analyser les résultats qualitatifs
-pour le modèle, avec $\rho$ de l'ordre de $\lambda_2$. On observe des groupes au sein
-desquels l'opinion est globalement homogène. Cette structure de groupe semble être peu
-sensible à la répartition initiale des opinions puisqu'elle apparaît très souvent sur
-plusieurs simulations (voir \fig{res_3cs}).
-
-\begin{figure}[htb]
-	\begin{center}
-		\includegraphics[width=.4\textwidth]{za-m1-3}
-		\includegraphics[width=.4\textwidth]{do-m1-3}
-		\caption{Exemple de groupes apparaissant lors de la simulation}
-		\label{res_3cs}
-	\end{center}
-\end{figure}
-
-Remarque : certains groupes sont relativement petits devant d'autre.
-
 \paragraph{Évolution}
+
+Voici l'évolution des opinions des différents agents, pour $\rho$
+grand (première figure, une seule communauté) et $\rho$ petit (seconde
+figure, formation de communautés à cause du forcage).
 
 \begin{figure}[htb]
 	\begin{center}
@@ -276,15 +268,37 @@ Remarque : certains groupes sont relativement petits devant d'autre.
 	\label{fig:evol}
 \end{figure}
 
-Nous voyons ici apparaître 2 phases (\fig{fig:evol}):
+Nous voyons apparaître 2 phases (\fig{fig:evol}):
 \begin{itemize}
 	\item Une phase transitoire, où les opinions se rapprochent rapidement d'un <<~consensus~>>.
 		Dans le cas de plusieurs groupes, plusieurs consensus se distinguent.
 	\item Une phase de régime permanent : une fois les consensus atteints, aucune évolution n'est visible.
 \end{itemize}
 
-\paragraph{Influence du forçage}
 
+\paragraph{Formation de communautés}
+On visualise maintenant les résultats sur le graphe original, pour
+$\rho < \lambda_2$. On observe des groupes au sein desquels l'opinion
+est globalement homogène. Cette structure de groupe semble être peu
+sensible à la répartition initiale des opinions et persiste
+sur la plupart des simulations.
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=.4\textwidth]{za-m1-3}
+		\includegraphics[width=.4\textwidth]{do-m1-3}
+		\caption{Exemple de groupes apparaissant lors de la
+                  simulation. Les couleurs correspondent à l'opinion,
+                  et les liens détruits apparaissent en pointillés.}
+		\label{res_3cs}
+	\end{center}
+\end{figure}
+
+% Remarque : certains groupes sont relativement petits devant d'autre.
+
+
+\paragraph{Influence du forçage}
+Figure et interprétation à changer
 Maintenant nous nous intéressons à la bifurcation introduite en section \ref{forcage}.
 Pour ceci nous calculons le nombre de groupes quand $\rho$ \emph{diminue}
 (\fig{bifu_map}). $R$ est maintenu fixé, il n'a pas d'influence visible sur les résultats.
@@ -310,18 +324,18 @@ Si on augmente le nombre d'itérations, des erreurs numériques apparaîssent co
 		\includegraphics[width=.4\textwidth]{var_rho_0938}
 		\includegraphics[width=.4\textwidth]{var_rho_097}
 		\includegraphics[width=.5\textwidth]{var_rho_0948}
-		\caption{Évolution de l'écart type des opinions pour différentes valeurs de $\rho$}
+		\caption{Évolution de l'écart type des opinions pour
+                  $\rho = 0,938$, $0,97$ et $0,948$.}
 		\label{num_coupure}
 	\end{center}
 \end{figure}
 
-Dans les 2 premiers cas, $\rho$ est assez éloigné de $\lambda_2$, on a bien coupure si $\rho < \lambda_2$.
-Dans le troisième cas, on a pris $\rho \leq \lambda_2$, il y a théoriquement coupure, mais seulement après un grand nombre
-d'itérations. L'écart type est alors de l'ordre de la précision machine et on a des erreurs lors de la construction du graphe
-de voisinage $N'$.
-
-Dans la section suivante, en plus des méthodes << ad hoc >> pour la recherche de communautés,
-nous introduisons un nouveau modèle pour homogénéiser la taille des groupes.
+Dans les 2 premiers cas, $\rho$ est assez éloigné de $\lambda_2$, on a
+bien coupure si $\rho < \lambda_2$.  Dans le troisième cas, on a $\rho
+\leq \lambda_2$. Il y a théoriquement coupure, mais seulement après un
+grand nombre d'itérations. L'écart type est alors de l'ordre de la
+précision machine et les erreurs numériques nous empêchent d'avoir des
+résultats concluants.
 
 \section{Partitionnement de graphes et détection de communautés}
 Ces résultats montrent que le modèle fournit une méthode de
