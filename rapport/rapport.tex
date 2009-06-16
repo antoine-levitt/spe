@@ -293,7 +293,6 @@ sur la plupart des simulations.
 
 % Remarque : certains groupes sont relativement petits devant d'autre.
 
-
 \subsection{Influence du forçage}
 Figure et interprétation à changer
 
@@ -301,7 +300,7 @@ Maintenant nous nous intéressons à la bifurcation introduite en
 section \ref{forçage}.  Pour ceci nous calculons le nombre de groupes
 pour différentes valeurs de $\rho$ \fig{bifu_map}. $R$ est maintenu
 suffisamment grand pour ne pas influer sur les résultats.  Nous
-utiliseons le graphe de Zachary, pour lequel $\lambda_2 \approx
+utilisons le graphe de Zachary, pour lequel $\lambda_2 \approx
 0,953$.  Le nombre de groupe est calculé en faisant la moyenne sur 10
 simulations.
 
@@ -313,29 +312,26 @@ simulations.
 	\end{center}
 \end{figure}
 
-Il n'y a qu'un groupe pour $\rho \geq \lambda_2$. Pour $\rho < \lambda_2$, on l'apparition de quelques groupes, jusqu'à $0,91$ où
-on a brusquement une vingtaine de groupes. La bifurcation a bien lieu, mais pour $\rho < \lambda_2$. Pour $\rho \leq \lambda_2$, les
-vitesses de décroissances de $R\rho^t$ d'une part et de la différence entre les opinions d'une autre par sont très proches. Il
-faut donc un grand nombre d'itérations pour arriver à la coupure. En s'arrêtant à 400 itérations, celle-ci n'apparaît donc pas.
-Si on augmente le nombre d'itérations, des erreurs numériques apparaîssent comme on peut le voir \fig{num_coupure}.
-
+On observe bien un unique consensus pour $\rho$ suffisamment grand, et
+de plus en plus de divisions quand on diminue $\rho$. On s'attend
+à une bifurcation et à l'apparition de plusieurs communautés pour
+$\rho = \lambda_2 = 0,953$. Cependant, l'apparition de divisions
+n'apparaît que pour $\rho$ plus petit, vers $\lambda_2 = 0,94$.
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=.4\textwidth]{var_rho_0938}
 		\includegraphics[width=.4\textwidth]{var_rho_097}
 		\includegraphics[width=.5\textwidth]{var_rho_0948}
-		\caption{Évolution de l'écart type des opinions pour
- $\rho = 0,938$, $0,97$ et $0,948$.}
+		\caption{Évolution de l'écart type des opinions et
+                  comparaison avec $R \rho^t$ pour $\rho = 0,938$,
+                  $0,97$ et $0,948$. Échelle semi-logarithmique.}
 		\label{num_coupure}
 	\end{center}
 \end{figure}
-
-Dans les 2 premiers cas, $\rho$ est assez éloigné de $\lambda_2$, on a
-bien coupure si $\rho < \lambda_2$. Dans le troisième cas, on a $\rho
-\leq \lambda_2$. Il y a théoriquement coupure, mais seulement après un
-grand nombre d'itérations. L'écart type est alors de l'ordre de la
-précision machine et les erreurs numériques nous empêchent d'avoir des
-résultats concluants.
+Ce phénomène est dû aux erreurs numériques. On représente
+\fig{num_coupure} l'évolution de l'écart type (qui est égal à $||x -
+x_\infty||$) en fonction du temps, et la courbe $R \rho^t$, pour
+différentes valeurs de $\rho$.
 
 \section{Partitionnement de graphes et détection de communautés}
 Ces résultats montrent que le modèle fournit une méthode de
