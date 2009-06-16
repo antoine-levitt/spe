@@ -49,7 +49,7 @@ le degré du noeud $i$, égal au nombre d'arêtes incidentes au noeud
 $i$ : $d_i = card \{v \in V | i \in v\}$. À cette notion est
 associée celle de {\bf matrice des degrés} $D$, matrice diagonale
 de taille $n \times n$ telle que $D_{i i} = d_i$. On définit
-également la {\bf matrice d'incidence} $A$ telle que $A_{i j} = 1$
+également la {\bf matrice d'adjacence} $A$ telle que $A_{i j} = 1$
 si $\{i, j\} \in V$, $0$ sinon. Le graphe étant non orienté, cette
 matrice est symétrique.
 
@@ -208,15 +208,15 @@ les principaux résultats.
 
 
 \subsection{Graphes utilisés}
-Nous cherchons des communautés apparaissant dans la réalité, dans ce but
-nous utilisons des graphes réels. Des graphes aléatoires ne présentent pas
-a priori une telle structure.
+Nous allons nous intéresser à la formation de communautés. On ne peut
+donc pas étudier des graphes aléatoires, et on utilise des graphes
+existants, dont les communautés ont été observées expérimentalement.
 
-Nous utilisons principalement deux graphes, représentés \fig{exemples_graphes}. Le premier
-est le réseau d'amitié dans un club de karaté d'une université américaine dans les années
-70, contenant 34 membres \cite{zachary}. Le second est le graphe d'interactions d'une
-communauté de 62 dauphins \cite{dolphins}. Il a été observé une séparation de ce groupe
-après le départ d'un individu clé.
+Nous utilisons principalement deux graphes, représentés
+\fig{exemples_graphes}. Le premier est le réseau d'amitié dans un club
+de karaté d'une université américaine dans les années 70 contenant 34
+membres, introduit par Zachary \cite{zachary}. Le second est le graphe
+d'interactions d'une communauté de 62 dauphins \cite{dolphins}.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -227,6 +227,10 @@ après le départ d'un individu clé.
 	\caption{Club de karaté (a), et dauphins (b).}
 	\label{exemples_graphes}
 \end{figure}
+
+Ces deux graphes sont intéressants parce qu'ils permettent de comparer
+nos résultats à la réalité, des communautés ayant été mises en
+évidence dans ces deux cas.
 
 \subsection{Choix des paramètres}
 Les opinions initiales sont tirés selon une loi uniforme sur $[0; 1]$.
