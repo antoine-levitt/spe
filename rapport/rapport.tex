@@ -11,8 +11,8 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 
-\def\fig#1{\textsc{Figure}~\ref{#1}}
-\def\eq#1{(\ref{#1})}
+\newcommand{\fig}[1]{\textsc{Figure}~\ref{#1}}
+\newcommand{\eq}[1]{(\ref{#1})}
 
 \newtheorem{theorem}{Théorème}
 \newtheorem{definition}{Définition}
@@ -45,7 +45,7 @@ l'état des opinions est donc représenté par un vecteur $x \in
 dans $\R^d$.
 
 Tout d'abord, quelques rappels de théorie des graphes. On note $d_i$
-le degré du noeud $i$, égal au nombre d'arêtes incidentes au noeud
+le degré du n\oe ud $i$, égal au nombre d'arêtes incidentes au n\oe ud
 $i$ : $d_i = card \{v \in V | i \in v\}$. À cette notion est
 associée celle de {\bf matrice des degrés} $D$, matrice diagonale
 de taille $n \times n$ telle que $D_{i i} = d_i$. On définit
@@ -59,7 +59,7 @@ utile par la suite, la {\bf matrice Laplacienne}, définie par $L
 $i$ est adjacent à $j$, et $L_{i j} = 0$ sinon. Son nom vient du
 fait que c'est l'analogue pour un graphe quelconque de
 l'opérateur Laplacien classique : pour un graphe représentant un
-espace à $2$ dimensions discrétisé, c'est-à-dire dont les noeuds
+espace à $2$ dimensions discrétisé, c'est-à-dire dont les n\oe uds
 sont les points $(i \Delta x, j \Delta y)$, on a $L(x) (i, j) =
 4 x(i, j) - x(i+1, j) - x(i-1, j) - x(i, j+1) - x(i, j-1)$, et
 on retrouve au signe près le Laplacien discrétisé. Les
@@ -81,7 +81,7 @@ On peut interpréter cette équation en la réécrivant sous forme scalaire :
  \label{eq_diff_scal}
  \dot {x}_i = \sum_{j \in N_i} (x_j - x_i),
 \end{equation}
-où $N_i$ est le voisinage de $i$, c'est à dire tous les noeuds qui lui
+où $N_i$ est le voisinage de $i$, c'est à dire tous les n\oe uds qui lui
 sont adjacents. Chaque personne révise son opinion en fonction de
 celle de ses voisins. Intuitivement, on s'attend à ce que ce modèle
 provoque une convergence vers un consensus. Cette intuition est
@@ -118,7 +118,7 @@ tout $x \in \R^n$.
 \end{eqnarray*}
 
 $L$ est donc positive. On voit également qu'un vecteur propre associé
-à la valeur propre $0$ a la même valeur sur tous les noeuds d'une
+à la valeur propre $0$ a la même valeur sur tous les n\oe uds d'une
 composante connexe. La multiplicité de $0$ comme valeur propre est
 donc égale au nombre de composantes connexes dans le graphe. On ne
 considère ici que des graphes connexes, donc on peut ranger les
@@ -368,7 +368,7 @@ poids dans la somme sur la plus petite valeur propre, c'est-à-dire, en
 supposant que les valeurs propres sont triées, prendre $x$ parallèle à
 $v_1$. Comme vu précédemment, $\lambda_1 = 0$ et $v_1 = (1, 1, \dots,
 1)^T$, ce qui donne une solution triviale du problème. Cette solution
-consiste à mettre tous les noeuds dans $E_1$ : $n_a = 0$, mais ce
+consiste à mettre tous les n\oe uds dans $E_1$ : $n_a = 0$, mais ce
 n'est pas très intéressant. On fixe donc la composante sur $v_1$ à 0,
 et la solution est maintenant de prendre $x$ parallèle à $v_2$.
 
@@ -382,7 +382,7 @@ Cette solution donne de bons résultats approchés pour le problème de
 minimisation. Un avantage est qu'il existe des algorithmes efficaces
 pour calculer $v_2$ (basés sur la méthode des
 puissances). Typiquement, pour un graphe non pathologique (nombre
-d'arêtes de l'ordre du nombre de noeuds), l'algorithme de
+d'arêtes de l'ordre du nombre de n\oe uds), l'algorithme de
 partitionnement est en $\mathcal O(n^2)$.
 
 L'inconvénient de cette méthode est qu'elle cherche uniquement à
