@@ -342,6 +342,7 @@ Ces résultats montrent que le modèle fournit une méthode de
 partitionnement d'un graphe. On va maintenant la comparer avec des
 méthodes classiques de partitionnement.
 
+\subsection{Partitionnement spectral}
 Le problème à résoudre est : étant donné un graphe, comment le
 partitionner de la façon la plus naturelle possible ? Évidemment, il
 faut tout d'abord définir ce qu'on entend par <<~naturelle~>>. Un
@@ -389,8 +390,11 @@ et la solution est maintenant de prendre $x$ parallèle à $v_2$.
 Il faut maintenant remonter au problème original discret, en
 discrétisant la solution trouvée $v_2$. Par exemple, on peut vouloir
 chercher le vecteur $x$ de $\{0,1\}^n$ qui maximise le parallélisme
-$(x|v_2)$ avec $v2$, ce qui conduit à mettre les entrées positives de
-$v_2$ dans $E_1$ et les négatives dans $E_2$, ou le contraire.
+$(x|v_2)$ avec $v_2$, ce qui conduit à mettre les entrées positives de
+$v_2$ dans $E_1$ et les négatives dans $E_2$, ou le contraire. On peut
+également clusteriser $v_2$ pour isoler deux groupes, ce qui conduit à
+couper $v_2$ au point où la différence $v_2(i) - v_2(i-1)$ est la plus
+grande.
 
 Cette solution donne de bons résultats approchés pour le problème de
 minimisation. Un avantage est qu'il existe des algorithmes efficaces
@@ -399,6 +403,9 @@ puissances). Typiquement, pour un graphe non pathologique (nombre
 d'arêtes de l'ordre du nombre de n\oe uds), l'algorithme de
 partitionnement est en $\mathcal O(n^2)$.
 
+\subsection{Liens avec notre modèle}
+
+\subsection{Laplacienne normalisée}
 L'inconvénient de cette méthode est qu'elle cherche uniquement à
 minimiser le nombre d'arcs entre les groupes. Elle risque donc
 d'isoler de très petits groupements. Pour pallier à ce défaut, on
