@@ -111,8 +111,8 @@ tout $x \in \R^n$.
 
 \begin{eqnarray*}
  x^T L x & = & \sum_{i = 1}^n x_i \sum_{j \in N_i} (x_i - x_j) \\
- & = & \sum_{i = 1}^n d_i x_i^2 - \sum_{i = 1}^n \sum_{j \in N_i} x_i x_j \\
- & = & \sum_{\{i, j\} \in E} (x_i^2 + x_j^2) + \sum_{\{i, j\} \in E} 2 x_i x_j \\
+ & = & \sum_{i = 1}^n d_i {x_i}^2 - \sum_{i = 1}^n \sum_{j \in N_i} x_i x_j \\
+ & = & \sum_{\{i, j\} \in E} ({x_i}^2 + {x_j}^2) - 2 \sum_{\{i, j\} \in E} x_i x_j \\
  & = & \sum_{\{i, j\} \in E} (x_i - x_j)^2 \\
  & \geq & 0
 \end{eqnarray*}
@@ -160,6 +160,16 @@ temps. Le modèle précédent est retrouvé dans la limite où $\alpha$
 tend vers 0. Dans nos simulations, on prend $\alpha$ suffisamment
 petit pour ne pas introduire d'oscillations parasites, et suffisamment
 grand pour avoir des simulations rapides.
+
+Notons que les valeurs propres de l'application itérée $I - \alpha L$
+s'obtiennent à partir de celles de $L$ par la formule $\lambda = 1 -
+\alpha \lambda_L$. Si $\alpha$ est suffisamment petit, tous ces
+valeurs propres sont de valeur absolue strictement inférieure à $1$,
+sauf une correspondant au vecteur propre $(1, 1, \dots, 1)^T$. En
+triant les valeurs propres dans l'ordre $-1 < \lambda_n \leq
+\lambda_{n-1} \leq \dots \leq \lambda_2 < \lambda_1 = 1$, on
+retrouve bien la convergence vers la valeur moyenne à la vitesse
+${\lambda_2}^t$, avec $\lambda_2 = 1 - \alpha \lambda_{L,2}$.
 
 \subsection{Forçage et formation de communautés}
 \label{forçage}
@@ -388,9 +398,9 @@ discrétisant la solution trouvée $v_2$. Par exemple, on peut vouloir
 chercher le vecteur $x$ de $\{0,1\}^n$ qui maximise le parallélisme
 $(x|v_2)$ avec $v_2$, ce qui conduit à mettre les entrées positives de
 $v_2$ dans $V_1$ et les négatives dans $V_2$, ou le contraire. On peut
-également grouper les composantes de $v_2$ pour isoler deux parties,
-ce qui conduit à couper $v_2$ au point où la différence $v_2(i) - v_2(i-1)$
-est la plus grande.
+également grouper les composantes de $v_2$ pour chercher les deux
+parties les mieux isolées, ce qui conduit à couper $v_2$ au point où
+la différence $v_2(i) - v_2(i-1)$ est la plus grande.
 
 Cette solution donne de bons résultats approchés pour le problème de
 minimisation. Un avantage est qu'il existe des algorithmes efficaces
@@ -400,6 +410,22 @@ d'arêtes de l'ordre du nombre de n\oe uds), l'algorithme de
 partitionnement est en $\mathcal O(n^2)$.
 
 \subsection{Liens avec notre modèle}
+On va maintenant expliciter les liens existant entre notre modèle
+d'évolution d'opinion et la méthode de partitionnement spectral. Tout
+d'abord, remarquons que notre méthode consiste à itérer l'application
+$B = I - \alpha L$. Cette application possède les mêmes vecteurs
+propres que $L$, et ses valeurs propres s'obtiennent par la
+transformation affine $\lambda_B = 1 - \alpha \lambda_L$. À l'infini,
+on a $x(t) - x_\infty \approx \alpha_2 {\lambda_2}^t v_2$, où
+$\lambda_2$ est la seconde plus grande valeur propre de $B$ et $v_2$
+le vecteur propre associé, qui est également le vecteur propre associé
+à la seconde plus petite valeur propre de $L$.
+
+En supposant $R$ assez grand, après un transitoire, $x(t)$ satisfait
+l'approximation ci-dessus et est aligné sur $v_2$. La coupure dûe au
+terme $R \rho^t$ intervient après le transitoire, et on s'attend à ce
+que les opinions soient séparées en deux groupes en fonction du plus
+grand écart de $v_2$ : on retrouve bien le partitionnement spectral.
 
 \subsection{Laplacienne normalisée}
 L'inconvénient de cette méthode est qu'elle cherche uniquement à
