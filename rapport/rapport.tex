@@ -33,24 +33,24 @@ Blabla
 \section{Modèles de communautés}
 \subsection{Définitions}
 Dans toute la suite, $(E, V)$ désigne un graphe à $n$ n\oe uds et $m$
-arêtes non orienté : les éléments de $V$ sont des ensembles à deux
-éléments de $E$. Ce graphe représente un réseau de $n$ individus, liés
+arêtes non orienté : les éléments de $E$ sont des ensembles à deux
+éléments de $V$. Ce graphe représente un réseau de $n$ individus, liés
 par des relations spécifiques au domaine d'intérêt. Par exemple, on
-peut prendre pour $E$ les individus d'un réseau social en ligne (type
-Facebook, Myspace ...), et pour $V$ leurs relations d'amitié : $\{i,
-j\} \in V$ si et seulement si les individus $i$ et $j$ sont amis. À
-chaque individu $i$ on associe une valeur réelle \footnote{Il est facile
-de généraliser au cas multidimensionnel, mais on se restreindra à la
-dimension 1 ici.}$x_i$ représentant son opinion : l'état des opinions est
+peut prendre pour $V$ les individus d'un réseau social en ligne (type
+Facebook, Myspace ...), et pour $E$ leurs relations d'amitié : $\{i,
+j\} \in E$ si et seulement si les individus $i$ et $j$ sont amis. À
+chaque individu $i$ on associe une valeur réelle\footnote{Il est facile
+de généraliser au cas multidimensionnel, mais on se restreindra ici à la
+dimension 1.} $x_i$ représentant son opinion : l'état des opinions est
 donc représenté par un vecteur $x \in \R^n$.
 
 Tout d'abord, quelques rappels de théorie des graphes. On note $d_i$
 le degré du n\oe ud $i$, égal au nombre d'arêtes incidentes au n\oe ud
-$i$ : $d_i = card \{v \in V | i \in v\}$. À cette notion est
+$i$ : $d_i = card \{e \in E | i \in e\}$. À cette notion est
 associée celle de {\bf matrice des degrés} $D$, matrice diagonale
 de taille $n \times n$ telle que $D_{i i} = d_i$. On définit
 également la {\bf matrice d'adjacence} $A$ telle que $A_{i j} = 1$
-si $\{i, j\} \in V$, $0$ sinon. Le graphe étant non orienté, cette
+si $\{i, j\} \in E$, $0$ sinon. Le graphe étant non orienté, cette
 matrice est symétrique.
 
 On utilise ces notions pour construire la matrice qui nous sera
@@ -98,8 +98,8 @@ $L$ est symétrique donc diagonalisable dans une base orthonormée de
 vecteurs propres $(v_i)_{i=1\dots n}$ associés à des valeurs propres
 $(\lambda_i)_{i=1 \dots n}$. On décompose $x^0$ sur cette base : $x^0
 = \sum_{i=1}^n \alpha_i v_i$, et la solution de (\ref{eq_diff}) ayant
-cette condition initiale est $x(t) = \sum_{i=1}^n \alpha_i e^{-
- \lambda_i t} v_i$. L'étude de la convergence de l'équation
+cette condition initiale est $$x(t) = \sum_{i=1}^n \alpha_i e^{-
+ \lambda_i t} v_i.$$ L'étude de la convergence de l'équation
 différentielle passe donc par l'étude des valeurs propres de $L$.
 
 La somme des lignes de $L$ est égale à $0$ (par définition du degré),
@@ -112,8 +112,8 @@ tout $x \in \R^n$.
 \begin{eqnarray*}
  x^T L x & = & \sum_{i = 1}^n x_i \sum_{j \in N_i} (x_i - x_j) \\
  & = & \sum_{i = 1}^n d_i x_i^2 - \sum_{i = 1}^n \sum_{j \in N_i} x_i x_j \\
- & = & \sum_{\{i, j\} \in V} (x_i^2 + x_j^2) + \sum_{\{i, j\} \in V} 2 x_i x_j \\
- & = & \sum_{\{i, j\} \in V} (x_i - x_j)^2 \\
+ & = & \sum_{\{i, j\} \in E} (x_i^2 + x_j^2) + \sum_{\{i, j\} \in E} 2 x_i x_j \\
+ & = & \sum_{\{i, j\} \in E} (x_i - x_j)^2 \\
  & \geq & 0
 \end{eqnarray*}
 
@@ -343,15 +343,15 @@ Le problème à résoudre est : étant donné un graphe, comment le
 partitionner de la façon la plus naturelle possible ? Évidemment, il
 faut tout d'abord définir ce qu'on entend par <<~naturelle~>>. Un
 critère qui peut être intéressant est le nombre d'arêtes entre les
-deux groupes : on cherche la partition de $E$ en deux groupes $E_1$ et
-$E_2$ qui minimise ce nombre d'arêtes $n_a$.
+deux groupes : on cherche la partition de $V$ en deux groupes $V_1$ et
+$V_2$ qui minimise ce nombre d'arêtes $n_a$.
 
 On note $x_p$ le vecteur caractérisant cette partition : il vaut 1 sur
-$E_1$ et 0 sur $E_2$. Par le calcul mené au \ref{props_spectrales_L},
+$V_1$ et 0 sur $V_2$. Par le calcul mené au \ref{props_spectrales_L},
 on a :
 
 \begin{equation}
- x^T L x = \sum_{\{i, j\} \in V} (x_i - x_j)^2.
+ x^T L x = \sum_{\{i, j\} \in E} (x_i - x_j)^2.
 \end{equation}
 
 Appliqué à notre vecteur $x$, on obtient
@@ -379,7 +379,7 @@ poids dans la somme sur la plus petite valeur propre, c'est-à-dire, en
 supposant que les valeurs propres sont triées, prendre $x$ parallèle à
 $v_1$. Comme vu précédemment, $\lambda_1 = 0$ et $v_1 = (1, 1, \dots,
 1)^T$, ce qui donne une solution triviale du problème. Cette solution
-consiste à mettre tous les n\oe uds dans $E_1$ : $n_a = 0$, mais ce
+consiste à mettre tous les n\oe uds dans $V_1$ : $n_a = 0$, mais ce
 n'est pas très intéressant. On fixe donc la composante sur $v_1$ à 0,
 et la solution est maintenant de prendre $x$ parallèle à $v_2$.
 
@@ -387,7 +387,7 @@ Il faut maintenant remonter au problème original discret, en
 discrétisant la solution trouvée $v_2$. Par exemple, on peut vouloir
 chercher le vecteur $x$ de $\{0,1\}^n$ qui maximise le parallélisme
 $(x|v_2)$ avec $v_2$, ce qui conduit à mettre les entrées positives de
-$v_2$ dans $E_1$ et les négatives dans $E_2$, ou le contraire. On peut
+$v_2$ dans $V_1$ et les négatives dans $V_2$, ou le contraire. On peut
 également clusteriser $v_2$ pour isoler deux groupes, ce qui conduit à
 couper $v_2$ au point où la différence $v_2(i) - v_2(i-1)$ est la plus
 grande.
