@@ -140,7 +140,7 @@ Plutôt que de simuler ce modèle directement, on va utiliser un modèle
 discrétisé, qui a sensiblement les même propriétés tout en étant plus
 facile à étudier. Ce modèle permet notamment de rajouter des effets
 qui seraient plus délicats à manipuler, comme on le verra section
-\ref{forcage}. L'idée la plus simple est d'utiliser la méthode d'Euler
+\ref{forçage}. L'idée la plus simple est d'utiliser la méthode d'Euler
 sur (\ref{eq_diff}), qui donne la relation de récurrence en l'indice
 discret $t$ :
 \begin{equation}
@@ -161,8 +161,8 @@ tend vers 0. Dans nos simulations, on prend $\alpha$ suffisamment
 petit pour ne pas introduire d'oscillations parasites, et suffisamment
 grand pour avoir des simulations rapides.
 
-\subsection{Forcage et formation de communautés}
-\label{forcage}
+\subsection{Forçage et formation de communautés}
+\label{forçage}
 Les expériences numériques sur ce modèle donnent bien le résultat
 attendu, c'est-à-dire un consensus, et la vitesse de convergence est
 bien égale à la seconde valeur propre $\lambda_2$. On veut maintenant
@@ -236,7 +236,7 @@ nos résultats à la réalité, des communautés ayant été mises en
 Les opinions initiales sont tirés selon une loi uniforme sur $[0; 1]$.
 $R$ est choisi relativement grand devant la taille de la distribution
 initiale ($R\approx10$) pour éviter l'influence lors de la phase
-transitoire, comme expliqué section \ref{forcage}. Enfin, $\alpha$ est
+transitoire, comme expliqué section \ref{forçage}. Enfin, $\alpha$ est
 choisi de manière à avoir une simulation stable (voir section
 \ref{mod_discret}) : en pratique, on prend $\alpha = 0,1$ pour le
 graphe Zachary et $\alpha = 0,4$ pour les dauphins. On effectue $400$
@@ -256,7 +256,7 @@ d'opinion.
 
 Voici l'évolution des opinions des différents agents, pour $\rho$
 grand (première figure, une seule communauté) et $\rho$ petit (seconde
-figure, formation de communautés à cause du forcage).
+figure, formation de communautés à cause du forçage).
 
 \begin{figure}[htb]
 	\begin{center}
@@ -298,7 +298,7 @@ sur la plupart des simulations.
 
 \subsection{Influence du forçage}
 Figure et interprétation à changer
-Maintenant nous nous intéressons à la bifurcation introduite en section \ref{forcage}.
+Maintenant nous nous intéressons à la bifurcation introduite en section \ref{forçage}.
 Pour ceci nous calculons le nombre de groupes quand $\rho$ \emph{diminue}
 (\fig{bifu_map}). $R$ est maintenu fixé, il n'a pas d'influence visible sur les résultats.
 Nous utiliseons le graphe de Zachary, pour lequel $\lambda_2 \approx 0,953$.
