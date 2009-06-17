@@ -178,12 +178,12 @@ bien égale à la seconde valeur propre $\lambda_2$. On veut maintenant
 utiliser ces résultats pour obtenir des résultats sur la structure du
 graphe, et notamment l'existence de communautés dans celui-ci. L'idée
 est simple : si on force les gens à se mettre d'accord plus vite
-qu'ils ne se mettraient d'accord naturellement, il ne va pas y avoir
+qu'ils ne le feraient naturellement, il ne va pas y avoir
 consensus mais formation de différents groupes de même
 opinion. L'étude de ces groupes peut faire apparaître une structure de
 communauté. Pour mettre en pratique ces idées, on impose à chaque
 personne de ne prendre en considération que des avis raisonnablement
-proche du sien, et de se fermer de plus en plus au cours du
+proches du sien, et de se fermer de plus en plus au cours du
 temps. Cela conduit au même modèle que précédemment, hormis le fait que la
 somme n'est plus prise sur le voisinage de la personne dans le graphe,
 mais dans un sous-ensemble de celui-ci : $$N'_{i} = \{j \in N_i, ||x_i
@@ -235,13 +235,13 @@ d'interactions d'une communauté de 62 dauphins \cite{dolphins}.
 			(a) & (b)
 		\end{tabular}
 	\end{center}
-	\caption{Club de karaté (a), et dauphins (b).}
+	\caption{Club de karaté de Zachary (a), et dauphins (b).}
 	\label{exemples_graphes}
 \end{figure}
 
 Ces deux graphes sont intéressants parce qu'ils permettent de comparer
 nos résultats à la réalité, des communautés ayant été mises en
-évidence dans ces deux cas.
+évidence dans les deux cas.
 
 \subsection{Choix des paramètres}
 Les opinions initiales sont tirés selon une loi uniforme sur $[0; 1]$.
@@ -274,7 +274,7 @@ figure, formation de communautés à cause du forçage).
 		\includegraphics[width=.4\textwidth]{evolution_ok}
 		\includegraphics[width=.4\textwidth]{evolution_clusters}
 	\end{center}
-	\caption{Courbes d'évolution des opinions}
+	\caption{Évolution des opinions pour $\rho >> \lambda_2$ et $\rho << \lambda_2$.}
 	\label{fig:evol}
 \end{figure}
 
@@ -297,24 +297,21 @@ sur la plupart des simulations.
 	\begin{center}
 		\includegraphics[width=.4\textwidth]{za-m1-3}
 		\includegraphics[width=.4\textwidth]{do-m1-3}
-		\caption{Exemple de groupes apparaissant lors de la
- simulation. Les couleurs correspondent à l'opinion,
- et les liens détruits apparaissent en pointillés.}
+		\caption{Exemples de groupes apparaissant lors de la
+                  simulation, pour les deux graphes étudiés. Les
+                  couleurs correspondent à l'opinion relative, et les
+                  liens détruits apparaissent en pointillés.}
 		\label{res_3cs}
 	\end{center}
 \end{figure}
 
-% Remarque : certains groupes sont relativement petits devant d'autre.
-
 \subsection{Influence du forçage}
-Figure et interprétation à changer
-
 Maintenant nous nous intéressons à la bifurcation introduite en
 section \ref{forçage}.  Pour ceci nous calculons le nombre de groupes
 pour différentes valeurs de $\rho$ \fig{bifu_map}. $R$ est maintenu
 suffisamment grand pour ne pas influer sur les résultats.  Nous
 utilisons le graphe de Zachary, pour lequel $\lambda_2 \approx
-0,953$.  Le nombre de groupe est calculé en faisant la moyenne sur 10
+0,953$.  Le nombre de groupes est calculé en faisant la moyenne sur 10
 simulations.
 
 \begin{figure}[htb]
@@ -330,7 +327,7 @@ de plus en plus de divisions quand on diminue $\rho$. On s'attend
 à une bifurcation et à l'apparition de plusieurs communautés pour
 $\rho = \lambda_2 = 0,953$. Cependant, l'apparition de divisions
 n'apparaît que pour $\rho$ plus petit, vers $\lambda_2 = 0,94$.
-\begin{figure}[htb]
+\begin{figure}[h!]
 	\begin{center}
 		\includegraphics[width=.4\textwidth]{var_rho_0938}
 		\includegraphics[width=.4\textwidth]{var_rho_097}
@@ -345,6 +342,16 @@ Ce phénomène est dû aux erreurs numériques. On représente
 \fig{num_coupure} l'évolution de l'écart type (qui est égal à $||x -
 x_\infty||$) en fonction du temps, et la courbe $R \rho^t$, pour
 différentes valeurs de $\rho$.
+
+Quand $\lambda_2 > \rho$, il n'y a pas de coupure et l'écart-type
+descend jusqu'à la précision machine de $10^{-16}$. Quand $\lambda_2
+<< \rho$, il y a coupure au bout d'un temps relativement faible, et il
+y a formation de communautés. Mais quand $\lambda_2 < \rho$ et que la
+différence est faible, le nombre d'itérations nécessaires pour voir la
+coupure est trop grand et des problèmes de précision machine empêchent
+d'observer des communautés. C'est pour cela que la bifurcation
+observée \fig{bifu_map} apparaît pour une valeur de $\rho$ inférieure
+à la valeur théorique $\lambda_2$.
 
 \section{Partitionnement de graphes et détection de communautés}
 Ces résultats montrent que le modèle fournit une méthode de
@@ -375,7 +382,7 @@ Appliqué à notre vecteur $x$, on obtient
 Ainsi notre problème s'écrit : trouver $x \in \{0,1\}^n$ qui
 minimise $x^T L x$. C'est un problème d'optimisation combinatoire
 qui peut être coûteux à résoudre quand $n$ est grand, et une
-énumération triviale mène à une complexité en $\mathcal O (2^n)$. On peut
+énumération exhaustive mène à une complexité en $\mathcal O (2^n)$. On peut
 cependant en obtenir une approximation par une méthode spectrale. On
 considère le problème analogue en domaine continu : $x$ est
 maintenant pris dans la sphère unité de $R^n$. $L$ est symétrique donc
@@ -396,7 +403,7 @@ consiste à mettre tous les n\oe uds dans $V_1$ : $n_a = 0$, mais ce
 n'est pas très intéressant. On fixe donc la composante sur $v_1$ à 0,
 et la solution est maintenant de prendre $x$ parallèle à $v_2$.
 
-Il faut maintenant remonter au problème original discret, en
+Il faut encore remonter au problème original discret, en
 discrétisant la solution trouvée $v_2$. Par exemple, on peut vouloir
 chercher le vecteur $x$ de $\{0,1\}^n$ qui maximise le parallélisme
 $(x|v_2)$ avec $v_2$, ce qui conduit à mettre les entrées positives de
@@ -434,8 +441,20 @@ grand écart de $v_2$ : on retrouve bien le partitionnement spectral.
 L'inconvénient de cette méthode est qu'elle cherche uniquement à
 minimiser le nombre d'arcs entre les groupes. Elle risque donc
 d'isoler de très petits groupements. Pour pallier à ce défaut, on
-utilise donc BLABLA renormalisé.
+normalise le problème d'optimisation par le degré des noeuds, ce qui
+conduit à minimiser $x^T \sqrt{D^{-1}} L \sqrt{D^{-1}} x$. On applique
+exactement le même raisonnement que précédemment sur la matrice
+$\sqrt{D^{-1}} L \sqrt{D^{-1}}$ plutôt que $L$. Pour notre modèle,
+cela conduit à remplacer l'équation (\ref{eq_discrete_scal}) par :
+\begin{equation}
+ \label{eq_discrete_scal_renorm}
+ x_i(t) = x_i(t) + \frac{\alpha}{d_i} \sum_{j \in N_i} (x_j(t) - x_i(t)).
+\end{equation}
 
+L'interprétation est la même que précédemment, sauf que chaque
+personne change son avis en direction de la moyenne de ses voisins et
+non pas de la somme : cela évite qu'une personne très connectée change
+trop d'avis.
 \subsection{Résultats}
 Dans cette dernière section, on compare la méthode <<~normalisée~>> à la
 méthode spectrale.
