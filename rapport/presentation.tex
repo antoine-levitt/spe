@@ -29,7 +29,7 @@ sociaux}}
   \item Chaque noeud $i$ est un agent avec une opinion $x_i \in
     \mathbb {R}$.
   \item Evolution de cette opinion $x_i$ selon un modèle.
-  \item Dynamique utile pour comprendre le graphe.
+  \item Dynamique du modèle utile pour comprendre le graphe.
   \end{itemize}
 \end{frame}
 
@@ -50,13 +50,13 @@ sociaux}}
   \item   $\dot{x} + L x = 0$
   \item ``Équation de la chaleur'' pour un graphe.
   \item $\dot{x}_i = \sum_{j \in N_i} (x_j - x_i)$.
-  \item Modification de l'opinion de chaque agent en fonction des voisin.
+  \item Modification de l'opinion de chaque agent en fonction des voisins.
   \item Vecteur propre de $L$ $(1, 1, \dots, 1)^T$ associé à $0$ :
     conservation de la moyenne.
-  \item $L$ symétrique positive, $\lambda_1 = 0 < \lambda_1 \leq
-    \lambda_2 \leq \dots \leq \lambda_n$.
+  \item $L$ symétrique positive, $0 = \lambda_1 < \lambda_2 \leq
+    \lambda_3 \leq \dots \leq \lambda_n$.
   \item Convergence vers la valeur moyenne selon $x(t) - x_\text{moy}
-    \approx K v_2 e^{-\lambda_2 t}$.
+    \approx K e^{-\lambda_2 t} v_2$.
   \item $\lambda_2$ est la {\bf connectivité algébrique} du graphe.
   \end{itemize}
 \end{frame}
@@ -67,8 +67,8 @@ sociaux}}
   \item Méthode d'Euler : $x(t+1) = (I - \alpha L) x(t)$ pour $\alpha$
     petit.
   \item $x_i(t+1) = x_i(t) + \alpha \sum_{j \in N_i} (x_j(t) - x_i(t))$
-  \item Même analyse, $x(t) - x_\text{moy} = K v_2 (1 - \alpha
-    \lambda_2)^t$.
+  \item Même analyse, $x(t) - x_\text{moy} \approx K (1 - \alpha
+    \lambda_2)^t v_2$.
   \item $\alpha$ fixé suffisamment petit pour éviter les instabilités.
   \item Modèle utilisé en pratique.
   \item Plus facile à modifier.
@@ -130,8 +130,52 @@ sociaux}}
 	\end{center}
 \end{frame}
 
-\begin{frame}{Partitionnement spectral}
-  blah
+\begin{frame}{Partitionnement spectral}{Comparaison avec des méthodes classiques}
+  \begin{itemize}
+  \item Notre modèle divise le graphe en communautés de façon fiable.
+  \item Lien avec la méthode de partitionnement spectral.
+  \item Comment partitionner un graphe en deux groupes de façon <<~naturelle~>> ?
+  \item Critère : nombre d'arcs entre les groupes.
+  \item Trouver $x \in {0,1}^n$ qui minimise $n_a x^T L x$.
+  \item Problème difficile : énumération exhaustive en $\mathcal{O}(2^n)$.
+  \item Idée : résoudre le problème continu puis le discrétiser.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Partitionnement spectral}{Solution du problème}
+  \begin{itemize}
+  \item Problème continu : trouver $x \in \mathbb{R}^n, ||x|| = 1$,
+    qui minimise $x^T L x$.
+  \item $x^T L x = \sum_{i=1}^n \lambda_i \alpha_i^2$, $\alpha_i$
+    composantes de $x$ dans la base de diagonalisation.
+  \item Meilleure solution $x = v_1 = (1, 1, \dots, 1)^T/\sqrt{n}$,
+    $n_a = 0$ : correspond à tous les noeuds dans le même groupe !
+  \item Solution interdite, on fixe $\alpha_1 = 0$.
+  \item $x = v_2$.
+  \item Retour au problème discret en partitionnant $v_2$.
+  \item Deux variantes : séparer entre positifs/négatifs, et séparer
+    selon le plus grand écart.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Partitionnement spectral}{Lien avec notre modèle}
+  \begin{itemize}
+  \item Dans notre modèle : si $R$ est grand, $x(t) - x_\text{moy}$ est
+    sur $v_2$ après un transitoire.
+  \item Le forcage coupe $v_2$ en plusieurs groupes.
+  \item On s'attend donc à des résultats similaires au partitionnement spectral.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Laplacienne normalisée}{Variante}
+  \begin{itemize}
+  \item Normaliser $x$ par les degrés dans le problème d'optimisation
+    donne de meilleurs résultats.
+  \item Minimiser $(\sqrt{D^{-1}}x)^T L (\sqrt{D^{-1}}x)$.
+  \item Même raisonnement que précédemment, avec $\sqrt{D^{-1}} L \sqrt{D^{-1}}$.
+  \item $x_i(t+1) = x_i(t) + \frac{\alpha}{d_i} \sum_{j \in N_i} (x_j(t) - x_i(t))$
+  \item Éviter que les personnes très connectées soient très influencées.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Résultats}{Spectres}
@@ -146,8 +190,8 @@ sociaux}}
 			\bigskip
 			Deux méthodes pour la division spectrale :
 			\begin{enumerate}
-				\item Grouper les n\oe uds ayant une composante positive sur $v$, et ceux ayant une composante négative.
-				\item Trier les n\oe uds selon leur composantes sur $v$ et couper au plus grand écart.
+				\item Grouper les n\oe uds ayant une composante positive sur $v_2$, et ceux ayant une composante négative.
+				\item Trier les n\oe uds selon leur composantes sur $v_2$ et couper au plus grand écart.
 			\end{enumerate}
 		\end{center}
 \end{frame}
