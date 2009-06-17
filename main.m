@@ -4,16 +4,18 @@ addpath 'plot';
 % paramètres
 global PARAMS
 PARAMS.gstyle = 2;
-PARAMS.rho = .97;
+PARAMS.rho = .942;
 PARAMS.alpha = .1;
 PARAMS.method = 1;
 PARAMS.d = 1;
 PARAMS.r = 10;
-PARAMS.iterations = 1000;
+PARAMS.iterations = 400;
 PARAMS.distrib = 'uni';
-PARAMS.graph = 'zachari';
+PARAMS.graph = 'dolph';
+PARAMS.plot_n = 1;
 PARAMS.laplace = 0;
 PARAMS.max_gap = 0;
+PARAMS.animate = 0;
 
 % le graphe
 switch PARAMS.graph
@@ -50,7 +52,7 @@ Xs=[];
 clusters(A, Xs, U);
 
 % évolution temporelle
-%evolution(A, Xs, i, B);
+evolution(A, Xs, i, B);
 
 % analyse des variances
-variances(A, Xs);
+%variances(A, Xs);

@@ -3,7 +3,7 @@ function [node_list, B] = break_recu(A, recursing, laplace_max_clusters)
 	global PARAMS
 
 	if ~(exist('laplace_max_clusters'))
-		laplace_max_clusters = 4;
+		laplace_max_clusters = 2;
 	end
 	if ~(2^nextpow2(laplace_max_clusters) == laplace_max_clusters)
 		error('max clusters is not a power of 2');

@@ -97,6 +97,20 @@ if nargout > 2
     if ~isempty(idx2), h(idx2,:) = h2;   end;
 end;
 
+idx1 = find(node_t == 0); wd1 = [];   %  Draw  nodes 
+if ~isempty(idx1),
+    [h1 wd1] = textoval(x(idx1), y(idx1), labels(idx1), fontsize, color);
+end;
+
+idx2 = find(node_t ~= 0); wd2 = [];
+if ~isempty(idx2),
+    [h2 wd2] = textbox(x(idx2), y(idx2), labels(idx2), color);
+end;
+
+wd = zeros(size(wd1,1) + size(wd2,1),2);
+if ~isempty(idx1), wd(idx1, :) = wd1; end;
+if ~isempty(idx2), wd(idx2, :) = wd2; end;
+
 function [t, wd] = textoval(x, y, str, fontsize, c)
 %  [t, wd] = textoval(x, y, str, fontsize)    Draws an oval around text objects
 % INPUT:   x, y - Coordinates
