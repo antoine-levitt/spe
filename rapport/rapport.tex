@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage[small]{caption}
 \usepackage{amsmath, amssymb}
+\usepackage{hyperref}
 \usepackage{fullpage}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -459,7 +460,7 @@ méthode spectrale.
 Nous voyons \fig{fig:partitions-za} que le premier modèle et la méthode spectrale avec coupure sur le plus grand écart sont peu
 satisfaisants, des n\oe uds sont isolés. Par contre, avec coupure en 0 et le modèle normalisé donnent de bons résultats
 (identiques) : les groupes sont à peu près homogènes en taille. 
-La \fig{fig:spectre-za} indique qu'il serait raisonnable de faire jusqu'à 5 groupes, les valeurs propres autour de 1,8 étant assez
+La \fig{fig:spectres} indique qu'il serait raisonnable de faire jusqu'à 5 groupes, les valeurs propres autour de 1,8 étant assez
 rapprochées.
 
 \begin{figure}[bth]
@@ -482,24 +483,17 @@ rapprochées.
 
 Pour les dauphins, toutes les méthodes donnent qualitativement le même résultats, c'est-à-dire une coupure selon la diagonale qui
 apparaît dans la \fig{fig:partitions-do}. On pourrait s'intéresser à une séparation plus importante, mais ça n'aurait pas beaucoup
-de sens : comme le montre la \fig{fig:spectre-do}, $\lambda_3$ et $\lambda_4$ sont très resserrées, on a pas de <<~vraie~>> raison
+de sens : comme le montre la \fig{fig:spectres}, $\lambda_3$ et $\lambda_4$ sont très resserrées, on a pas de <<~vraie~>> raison
 de choisir $v_3$ plutôt que $v_4$ pour la séparation, qui perdrait alors son sens.
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=\textwidth]{new_plots/spectre-za}
+		\includegraphics[width=\textwidth]{new_plots/spectres}
 	\end{center}
-	\caption{Repartition des premières valeurs propres de la Laplacienne pour Zachary}
-	\label{fig:spectre-za}
+	\caption{Repartition des premières valeurs propres de la Laplacienne pour Zachary (bleu) et les dauphins (rouge)}
+	\label{fig:spectres}
 \end{figure}
 
-\begin{figure}[htb]
-	\begin{center}
-		\includegraphics[width=\textwidth]{new_plots/spectre-do}
-	\end{center}
-	\caption{Repartition des premières valeurs propres de la Laplacienne pour les dauphins}
-	\label{fig:spectre-do}
-\end{figure}
 \section{Conclusion}
 bonsoir
 
