@@ -56,5 +56,62 @@ sociaux}}
 	\includegraphics[width=\textwidth]{bifur}
 \end{frame}
 
+\begin{frame}{Problèmes numériques}
+	\begin{center}
+		\includegraphics[width=.4\textwidth]{var_rho_0938}
+		\includegraphics[width=.4\textwidth]{var_rho_097}\\
+		\includegraphics[width=.6\textwidth]{var_rho_0948}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Résultats}{Spectres}
+		\begin{center}
+			Spectres des Laplaciennes des deux graphes étudiés :
+			\begin{description}
+				\item[\alert{Rouge}] : Dauphins
+				\item[Bleu] : Zachary
+			\end{description}
+			\bigskip
+			\includegraphics[width=\textwidth]{new_plots/spectres}\\
+			\bigskip
+			Deux méthodes pour la division spectrale :
+			\begin{enumerate}
+				\item Grouper les n\oe uds ayant une composante positive sur $v$, et ceux ayant une composante négative.
+				\item Trier les n\oe uds selon leur composantes sur $v$ et couper au plus grand écart.
+			\end{enumerate}
+		\end{center}
+\end{frame}
+
+\begin{frame}{Résultats}{Zachary}
+	\begin{center}
+		\begin{tabular}[h]{ccc}
+		\includegraphics[width=0.30\textwidth]{new_plots/za-m1}&
+		\includegraphics[width=0.30\textwidth]{new_plots/za-sp-ge}&
+		\includegraphics[width=0.30\textwidth]{new_plots/za-m2}
+		\\
+		(a) & (b) & (c)
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Résultats}{Dauphins}
+	\begin{center}
+		\begin{tabular}[h]{ccc}
+		\includegraphics[width=0.6\textwidth]{do-m2-2}
+		\vspace{-1cm}
+		\\
+		(a) (b) (c)
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item Modèle non normalisé peu fiable, de même que l'analyse spectrale sur plus grand écart (analyse trop simpliste ?).
+		\item Modèle normalisé plutôt satifsaisant, on retrouve les observations. Idem pour la séparation en 0.
+		\item Il existe des méthodes plus performantes, utilisant des notions plus complexes pour les graphes (<<~modularité~>>).
+	\end{itemize}
+\end{frame}
+
 
 \end{document}
