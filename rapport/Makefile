@@ -1,4 +1,4 @@
-EPSS=$(wildcard *.eps)
+EPSS=$(wildcard *.eps new_plots/*.eps)
 rapport: imagespdf rapport.tex
 	pdflatex rapport.tex
 imagespdf: $(EPSS:eps=pdf)

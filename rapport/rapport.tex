@@ -443,18 +443,25 @@ méthode spectrale.
 \begin{figure}[bth]
 	\begin{center}
 		\begin{tabular}[h]{ccc}
-		\includegraphics[width=0.30\textwidth]{za-m1-2}&
-		\includegraphics[width=0.30\textwidth]{za-m2-2}&
-		\includegraphics[width=0.30\textwidth]{za-m2-2-sp}
-		\vspace{-5mm}
+		\includegraphics[width=0.30\textwidth]{new_plots/za-m1}&
+		\includegraphics[width=0.30\textwidth]{new_plots/za-sp-ge}&
+		\includegraphics[width=0.30\textwidth]{new_plots/za-m2}
 		\\
 		(a) & (b) & (c)
 		\end{tabular}
 	\end{center}
-	\caption{Partitions obtenues sur le graphe Zachary pour 2 groupes, en fonction de la méthode utilisée. Premier modèle (a), modèle
-	normalisé (b) et analyse spectrale de la Laplacienne (c).}
-	\label{fig:partitions}
+	\caption{Partitions obtenues sur le graphe Zachary pour 4 groupes, en fonction de la méthode utilisée. Premier modèle (a),
+	analyse spectrale de la Laplacienne avec coupure au plus grand écart (b), modèle normalisé \emph{et} analyse spectrale avec
+	coupure à 0 (c).}
+	\label{fig:partitions-za}
 \end{figure}
+
+Nous voyons \fig{fig:partitions-za} que le premier modèle et la méthode spectrale avec coupure sur le plus grand écart sont peu
+satisfaisants, des n\oe uds sont isolés. Par contre, avec coupure en 0 et le modèle normalisé donnent de bons résultats
+(identiques) : les groupes sont à peu près homogènes en taille. 
+La \fig{fig:spectre-za} indique qu'il serait raisonnable de faire jusqu'à 5 groupes, les valeurs propres autour de 1,8 étant assez
+rapprochées.
+
 \begin{figure}[bth]
 	\begin{center}
 		\begin{tabular}[h]{ccc}
@@ -468,9 +475,31 @@ méthode spectrale.
 	\end{center}
 	\caption{Partitions obtenues sur le graphe <<~dauphins~>> pour 2 groupes, en fonction de la méthode utilisée. Mêmes notations que
 	ci-dessus.}
-	\label{fig:partitions}
+	\label{fig:partitions-do}
 \end{figure}
 
+
+
+Pour les dauphins, toutes les méthodes donnent qualitativement le même résultats, c'est-à-dire une coupure selon la diagonale qui
+apparaît dans la \fig{fig:partitions-do}. On pourrait s'intéresser à une séparation plus importante, mais ça n'aurait pas beaucoup
+de sens : comme le montre la \fig{fig:spectre-do}, $\lambda_3$ et $\lambda_4$ sont très resserrées, on a pas de <<~vraie~>> raison
+de choisir $v_3$ plutôt que $v_4$ pour la séparation, qui perdrait alors son sens.
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=\textwidth]{new_plots/spectre-za}
+	\end{center}
+	\caption{Repartition des premières valeurs propres de la Laplacienne pour Zachary}
+	\label{fig:spectre-za}
+\end{figure}
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=\textwidth]{new_plots/spectre-do}
+	\end{center}
+	\caption{Repartition des premières valeurs propres de la Laplacienne pour les dauphins}
+	\label{fig:spectre-do}
+\end{figure}
 \section{Conclusion}
 bonsoir
 
