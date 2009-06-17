@@ -29,7 +29,7 @@ else
 	x = xy(1,:);
 	y = xy(2,:);
 	if exist('full_A')
-		graph_draw(full_A, zeros(length(v), 3), 'linecolor', [0.7 0.7 0.7], 'linestyle', '-.', 'node_labels', l, 'fontsize', 9, 'node_shapes', zeros(size(x,2),1), 'X', x, 'Y', y);
+		graph_draw(full_A, zeros(length(v), 3), 'linecolor', [0 0 0], 'linestyle', '--', 'node_labels', l, 'fontsize', 9, 'node_shapes', zeros(size(x,2),1), 'X', x, 'Y', y);
 	end
 	graph_draw(A, colors, 'linewidth', 1, 'node_labels', l, 'fontsize', 9, 'node_shapes', zeros(size(x,2),1), 'X', x, 'Y', y);
 end
