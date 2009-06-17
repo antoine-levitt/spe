@@ -96,7 +96,7 @@ va maintenant démontrer ces propriétés de convergence.
 \label{props_spectrales_L}
 $L$ est symétrique donc diagonalisable dans une base orthonormée de
 vecteurs propres $(v_i)_{i=1\dots n}$ associés à des valeurs propres
-$(\lambda_i)_{i=1 \dots n}$. On décompose $x^0$ sur cette base : $x^0
+$(\lambda_i)_{i=1 \dots n}$. On décompose $x(0)$ sur cette base : $x(0)
 = \sum_{i=1}^n \alpha_i v_i$, et la solution de (\ref{eq_diff}) ayant
 cette condition initiale est $$x(t) = \sum_{i=1}^n \alpha_i e^{-
  \lambda_i t} v_i.$$ L'étude de la convergence de l'équation
@@ -125,7 +125,7 @@ considère ici que des graphes connexes, donc on peut ranger les
 valeurs propres : $0 = \lambda_1 < \lambda_2 \leq \lambda_3 \leq \dots
 \leq \lambda_n$. Le comportement en l'infini de (\ref{eq_diff}) est
 donc trivial : il converge vers $(\alpha_1, \alpha_1, \dots,
-\alpha_1)^T$ qui n'est autre que la valeur moyenne de $x^0$. La
+\alpha_1)^T$ qui n'est autre que la valeur moyenne de $x(0)$. La
 vitesse de convergence est dictée par la deuxième valeur propre
 $\lambda_2$ : $||x(t) - x_\infty|| \approx e^{-\lambda_2 t}$. Cette
 valeur propre est appellée {\bf connectivité algébrique}, et mesure à
@@ -137,7 +137,7 @@ suite.
 \subsection{Modèle discret}
 \label{mod_discret}
 Plutôt que de simuler ce modèle directement, on va utiliser un modèle
-discrétisé, qui a sensiblement les même propriétés tout en étant plus
+discrétisé, qui a sensiblement les mêmes propriétés tout en étant plus
 facile à étudier. Ce modèle permet notamment de rajouter des effets
 qui seraient plus délicats à manipuler, comme on le verra section
 \ref{forçage}. L'idée la plus simple est d'utiliser la méthode d'Euler
