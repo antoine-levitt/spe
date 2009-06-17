@@ -22,6 +22,72 @@ sociaux}}
 	\maketitle
 \end{frame}
 
+\begin{frame}{Contexte}
+  \begin{itemize}
+  \item Graphe non orienté connexe $(V, E)$.
+  \item $N_i = \{j\, |\, \{i, j\} \in E\}$ voisinage du noeud $i$.
+  \item Chaque noeud $i$ est un agent avec une opinion $x_i \in
+    \mathbb {R}$.
+  \item Evolution de cette opinion $x_i$ selon un modèle.
+  \item Dynamique utile pour comprendre le graphe.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Analyse matricielle de graphes}{Définitions}
+  \begin{itemize}
+  \item Degré d'un noeud $d_i$.
+  \item Matrice des degrés $D$ : $D_{i i} = d_i$.
+  \item Matrice d'adjacence $A$ : $A_{i j} = 1$ si $\{i,j\} \in E$,
+    $0$ sinon.
+  \item Matrice Laplacienne $L = D - A$.
+  \item $(L x)_i = d_i x_i - \sum_{j \in N_i} x_j$.
+  \item Analogue pour les graphes du Laplacien discret $\Delta$, au signe près.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Evolution des opinions}{Modèle continu}
+  \begin{itemize}
+  \item   $\dot{x} + L x = 0$
+  \item ``Équation de la chaleur'' pour un graphe.
+  \item $\dot{x}_i = \sum_{j \in N_i} (x_j - x_i)$.
+  \item Modification de l'opinion de chaque agent en fonction des voisin.
+  \item Vecteur propre de $L$ $(1, 1, \dots, 1)^T$ associé à $0$ :
+    conservation de la moyenne.
+  \item $L$ symétrique positive, $\lambda_1 = 0 < \lambda_1 \leq
+    \lambda_2 \leq \dots \leq \lambda_n$.
+  \item Convergence vers la valeur moyenne selon $x(t) - x_\text{moy}
+    \approx K v_2 e^{-\lambda_2 t}$.
+  \item $\lambda_2$ est la {\bf connectivité algébrique} du graphe.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Evolution des opinions}{Modèle discret}
+  \begin{itemize}
+  \item Dur à simuler et modifier : passage au discret.
+  \item Méthode d'Euler : $x(t+1) = (I - \alpha L) x(t)$ pour $\alpha$
+    petit.
+  \item $x_i(t+1) = x_i(t) + \alpha \sum_{j \in N_i} (x_j(t) - x_i(t))$
+  \item Même analyse, $x(t) - x_\text{moy} = K v_2 (1 - \alpha
+    \lambda_2)^t$.
+  \item $\alpha$ fixé suffisamment petit pour éviter les instabilités.
+  \item Modèle utilisé en pratique.
+  \item Plus facile à modifier.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Evolution}{Forçage}
+  \begin{itemize}
+  \item Forcer la convergence du système.
+  \item $N'_{i}(t) = \{j \in N_i, ||x_i(t) - x_j(t)|| < R \rho^t\}.$
+  \item Restriction du graphe de communication : convergence plus rapide.
+  \item Si la convergence n'est pas assez rapide, on abandonne le
+    consensus : coupures et formation de communautés.
+  \item On attend une bifurcation pour $\rho = \lambda_2$.
+  \item Les communautés sont-elles intrinsèques au graphe ?
+  \item Étude numérique.
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{Graphes utilisés}{Graphes réels}
 	\begin{center}
 		\begin{tabular}[h]{cc}
@@ -62,6 +128,10 @@ sociaux}}
 		\includegraphics[width=.4\textwidth]{var_rho_097}\\
 		\includegraphics[width=.6\textwidth]{var_rho_0948}
 	\end{center}
+\end{frame}
+
+\begin{frame}{Partitionnement spectral}
+  blah
 \end{frame}
 
 \begin{frame}{Résultats}{Spectres}
